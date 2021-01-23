@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.RepaymentplanMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.Repaymentplan">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <id column="planId" jdbcType="INTEGER" property="planId" />
+    <result column="pmtAmt" jdbcType="DECIMAL" property="pmtAmt" />
+    <result column="principal" jdbcType="DECIMAL" property="principal" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="remainTotalAmt" jdbcType="DECIMAL" property="remainTotalAmt" />
+    <result column="penalty" jdbcType="DECIMAL" property="penalty" />
+    <result column="liqui" jdbcType="DECIMAL" property="liqui" />
+    <result column="termNeedAmt" jdbcType="DECIMAL" property="termNeedAmt" />
+    <result column="compenGold" jdbcType="DECIMAL" property="compenGold" />
+    <result column="compenRecei" jdbcType="DECIMAL" property="compenRecei" />
+    <result column="amtAfterCompen" jdbcType="DECIMAL" property="amtAfterCompen" />
+    <result column="actualRepayDate" jdbcType="DATE" property="actualRepayDate" />
+    <result column="isOverdue" jdbcType="VARCHAR" property="isOverdue" />
+    <result column="isPayPrincipal" jdbcType="VARCHAR" property="isPayPrincipal" />
+    <result column="dealDetail" jdbcType="VARCHAR" property="dealDetail" />
+    <result column="reliefInfo" jdbcType="VARCHAR" property="reliefInfo" />
+    <result column="shouldTime" jdbcType="DATE" property="shouldTime" />
+    <result column="terms" jdbcType="INTEGER" property="terms" />
+    <result column="repaidCurrentAmt" jdbcType="DECIMAL" property="repaidCurrentAmt" />
+    <result column="remainCurrentAmt" jdbcType="DECIMAL" property="remainCurrentAmt" />
+    <result column="earlyCurrentAmt" jdbcType="DECIMAL" property="earlyCurrentAmt" />
+    <result column="shouldPenalty" jdbcType="DECIMAL" property="shouldPenalty" />
+    <result column="shouldLiqui" jdbcType="DECIMAL" property="shouldLiqui" />
+    <result column="shouldLatefee" jdbcType="DECIMAL" property="shouldLatefee" />
+    <result column="alsoPenalty" jdbcType="DECIMAL" property="alsoPenalty" />
+    <result column="alsoLiqui" jdbcType="DECIMAL" property="alsoLiqui" />
+    <result column="alsoLatefee" jdbcType="DECIMAL" property="alsoLatefee" />
+    <result column="breaksPenalty" jdbcType="DECIMAL" property="breaksPenalty" />
+    <result column="breaksLiqui" jdbcType="DECIMAL" property="breaksLiqui" />
+    <result column="breaksLatefee" jdbcType="DECIMAL" property="breaksLatefee" />
+    <result column="remainPenalty" jdbcType="DECIMAL" property="remainPenalty" />
+    <result column="remainLiqui" jdbcType="DECIMAL" property="remainLiqui" />
+    <result column="remainLatefee" jdbcType="DECIMAL" property="remainLatefee" />
+    <result column="currentOverDueDays" jdbcType="INTEGER" property="currentOverDueDays" />
+    <result column="tremStatus" jdbcType="VARCHAR" property="tremStatus" />
+    <result column="tremServicesCharge" jdbcType="DECIMAL" property="tremServicesCharge" />
+    <result column="payoffTime" jdbcType="DATE" property="payoffTime" />
+    <result column="repayType" jdbcType="VARCHAR" property="repayType" />
+    <result column="mgmtFee" jdbcType="DECIMAL" property="mgmtFee" />
+    <result column="leftPrincipal" jdbcType="DECIMAL" property="leftPrincipal" />
+    <result column="leftInterest" jdbcType="DECIMAL" property="leftInterest" />
+    <result column="repaidPrincipal" jdbcType="DECIMAL" property="repaidPrincipal" />
+    <result column="repaidInterest" jdbcType="DECIMAL" property="repaidInterest" />
+    <result column="repaidMgmtFee" jdbcType="DECIMAL" property="repaidMgmtFee" />
+    <result column="t0EarlyServiceFee" jdbcType="DECIMAL" property="t0EarlyServiceFee" />
+    <result column="t0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="t0EarlyServiceFeeOverdueInterest" />
+    <result column="leftT0EarlyServiceFee" jdbcType="DECIMAL" property="leftT0EarlyServiceFee" />
+    <result column="leftT0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="leftT0EarlyServiceFeeOverdueInterest" />
+    <result column="breaksT0EarlyServiceFee" jdbcType="DECIMAL" property="breaksT0EarlyServiceFee" />
+    <result column="breaksT0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="breaksT0EarlyServiceFeeOverdueInterest" />
+    <result column="guaranteeDeposit" jdbcType="DECIMAL" property="guaranteeDeposit" />
+    <result column="guaranteeDepositServiceFee" jdbcType="DECIMAL" property="guaranteeDepositServiceFee" />
+    <result column="leftGuaranteeDeposit" jdbcType="DECIMAL" property="leftGuaranteeDeposit" />
+    <result column="leftGuaranteeDepositServiceFee" jdbcType="DECIMAL" property="leftGuaranteeDepositServiceFee" />
+    <result column="breaksGuaranteeDeposit" jdbcType="DECIMAL" property="breaksGuaranteeDeposit" />
+    <result column="breaksGuaranteeDepositServiceFee" jdbcType="DECIMAL" property="breaksGuaranteeDepositServiceFee" />
+    <result column="funderOverdueInterest" jdbcType="DECIMAL" property="funderOverdueInterest" />
+    <result column="leftFunderOverdueInterest" jdbcType="DECIMAL" property="leftFunderOverdueInterest" />
+    <result column="breaksFunderOverdueInterest" jdbcType="DECIMAL" property="breaksFunderOverdueInterest" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    acctNo, planId, pmtAmt, principal, interest, remainTotalAmt, penalty, liqui, termNeedAmt, 
+    compenGold, compenRecei, amtAfterCompen, actualRepayDate, isOverdue, isPayPrincipal, 
+    dealDetail, reliefInfo, shouldTime, terms, repaidCurrentAmt, remainCurrentAmt, earlyCurrentAmt, 
+    shouldPenalty, shouldLiqui, shouldLatefee, alsoPenalty, alsoLiqui, alsoLatefee, breaksPenalty, 
+    breaksLiqui, breaksLatefee, remainPenalty, remainLiqui, remainLatefee, currentOverDueDays, 
+    tremStatus, tremServicesCharge, payoffTime, repayType, mgmtFee, leftPrincipal, leftInterest, 
+    repaidPrincipal, repaidInterest, repaidMgmtFee, t0EarlyServiceFee, t0EarlyServiceFeeOverdueInterest, 
+    leftT0EarlyServiceFee, leftT0EarlyServiceFeeOverdueInterest, breaksT0EarlyServiceFee, 
+    breaksT0EarlyServiceFeeOverdueInterest, guaranteeDeposit, guaranteeDepositServiceFee, 
+    leftGuaranteeDeposit, leftGuaranteeDepositServiceFee, breaksGuaranteeDeposit, breaksGuaranteeDepositServiceFee, 
+    funderOverdueInterest, leftFunderOverdueInterest, breaksFunderOverdueInterest, UpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.jikewang.send.domain.RepaymentplanKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from am_repaymentplan
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </select>
+  <select id="findLatest" resultType="java.lang.Integer">
+    SELECT
+    distinct acctNo
+    FROM
+    am_repaymentplan
+    where date(UpdateTime) = #{dt}
+    union
+    SELECT
+    distinct acctNo
+    from am_customer
+    where date(lastUpdateTime) = #{dt}
+    union
+    SELECT
+    distinct acctNo
+    from am_contact
+    where date(lastUpdateTime) = #{dt}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jikewang.send.domain.RepaymentplanKey">
+    delete from am_repaymentplan
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.Repaymentplan">
+    insert into am_repaymentplan (acctNo, planId, pmtAmt, 
+      principal, interest, remainTotalAmt, 
+      penalty, liqui, termNeedAmt, 
+      compenGold, compenRecei, amtAfterCompen, 
+      actualRepayDate, isOverdue, isPayPrincipal, 
+      dealDetail, reliefInfo, shouldTime, 
+      terms, repaidCurrentAmt, remainCurrentAmt, 
+      earlyCurrentAmt, shouldPenalty, shouldLiqui, 
+      shouldLatefee, alsoPenalty, alsoLiqui, 
+      alsoLatefee, breaksPenalty, breaksLiqui, 
+      breaksLatefee, remainPenalty, remainLiqui, 
+      remainLatefee, currentOverDueDays, tremStatus, 
+      tremServicesCharge, payoffTime, repayType, 
+      mgmtFee, leftPrincipal, leftInterest, 
+      repaidPrincipal, repaidInterest, repaidMgmtFee, 
+      t0EarlyServiceFee, t0EarlyServiceFeeOverdueInterest, 
+      leftT0EarlyServiceFee, leftT0EarlyServiceFeeOverdueInterest, 
+      breaksT0EarlyServiceFee, breaksT0EarlyServiceFeeOverdueInterest, 
+      guaranteeDeposit, guaranteeDepositServiceFee, 
+      leftGuaranteeDeposit, leftGuaranteeDepositServiceFee, 
+      breaksGuaranteeDeposit, breaksGuaranteeDepositServiceFee, 
+      funderOverdueInterest, leftFunderOverdueInterest, 
+      breaksFunderOverdueInterest, UpdateTime
+      )
+    values (#{acctNo,jdbcType=INTEGER}, #{planId,jdbcType=INTEGER}, #{pmtAmt,jdbcType=DECIMAL}, 
+      #{principal,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{remainTotalAmt,jdbcType=DECIMAL}, 
+      #{penalty,jdbcType=DECIMAL}, #{liqui,jdbcType=DECIMAL}, #{termNeedAmt,jdbcType=DECIMAL}, 
+      #{compenGold,jdbcType=DECIMAL}, #{compenRecei,jdbcType=DECIMAL}, #{amtAfterCompen,jdbcType=DECIMAL}, 
+      #{actualRepayDate,jdbcType=DATE}, #{isOverdue,jdbcType=VARCHAR}, #{isPayPrincipal,jdbcType=VARCHAR}, 
+      #{dealDetail,jdbcType=VARCHAR}, #{reliefInfo,jdbcType=VARCHAR}, #{shouldTime,jdbcType=DATE}, 
+      #{terms,jdbcType=INTEGER}, #{repaidCurrentAmt,jdbcType=DECIMAL}, #{remainCurrentAmt,jdbcType=DECIMAL}, 
+      #{earlyCurrentAmt,jdbcType=DECIMAL}, #{shouldPenalty,jdbcType=DECIMAL}, #{shouldLiqui,jdbcType=DECIMAL}, 
+      #{shouldLatefee,jdbcType=DECIMAL}, #{alsoPenalty,jdbcType=DECIMAL}, #{alsoLiqui,jdbcType=DECIMAL}, 
+      #{alsoLatefee,jdbcType=DECIMAL}, #{breaksPenalty,jdbcType=DECIMAL}, #{breaksLiqui,jdbcType=DECIMAL}, 
+      #{breaksLatefee,jdbcType=DECIMAL}, #{remainPenalty,jdbcType=DECIMAL}, #{remainLiqui,jdbcType=DECIMAL}, 
+      #{remainLatefee,jdbcType=DECIMAL}, #{currentOverDueDays,jdbcType=INTEGER}, #{tremStatus,jdbcType=VARCHAR}, 
+      #{tremServicesCharge,jdbcType=DECIMAL}, #{payoffTime,jdbcType=DATE}, #{repayType,jdbcType=VARCHAR}, 
+      #{mgmtFee,jdbcType=DECIMAL}, #{leftPrincipal,jdbcType=DECIMAL}, #{leftInterest,jdbcType=DECIMAL}, 
+      #{repaidPrincipal,jdbcType=DECIMAL}, #{repaidInterest,jdbcType=DECIMAL}, #{repaidMgmtFee,jdbcType=DECIMAL}, 
+      #{t0EarlyServiceFee,jdbcType=DECIMAL}, #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL}, 
+      #{leftT0EarlyServiceFee,jdbcType=DECIMAL}, #{leftT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL}, 
+      #{breaksT0EarlyServiceFee,jdbcType=DECIMAL}, #{breaksT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL}, 
+      #{guaranteeDeposit,jdbcType=DECIMAL}, #{guaranteeDepositServiceFee,jdbcType=DECIMAL}, 
+      #{leftGuaranteeDeposit,jdbcType=DECIMAL}, #{leftGuaranteeDepositServiceFee,jdbcType=DECIMAL}, 
+      #{breaksGuaranteeDeposit,jdbcType=DECIMAL}, #{breaksGuaranteeDepositServiceFee,jdbcType=DECIMAL}, 
+      #{funderOverdueInterest,jdbcType=DECIMAL}, #{leftFunderOverdueInterest,jdbcType=DECIMAL}, 
+      #{breaksFunderOverdueInterest,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.Repaymentplan">
+    insert into am_repaymentplan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        acctNo,
+      </if>
+      <if test="planId != null">
+        planId,
+      </if>
+      <if test="pmtAmt != null">
+        pmtAmt,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="remainTotalAmt != null">
+        remainTotalAmt,
+      </if>
+      <if test="penalty != null">
+        penalty,
+      </if>
+      <if test="liqui != null">
+        liqui,
+      </if>
+      <if test="termNeedAmt != null">
+        termNeedAmt,
+      </if>
+      <if test="compenGold != null">
+        compenGold,
+      </if>
+      <if test="compenRecei != null">
+        compenRecei,
+      </if>
+      <if test="amtAfterCompen != null">
+        amtAfterCompen,
+      </if>
+      <if test="actualRepayDate != null">
+        actualRepayDate,
+      </if>
+      <if test="isOverdue != null">
+        isOverdue,
+      </if>
+      <if test="isPayPrincipal != null">
+        isPayPrincipal,
+      </if>
+      <if test="dealDetail != null">
+        dealDetail,
+      </if>
+      <if test="reliefInfo != null">
+        reliefInfo,
+      </if>
+      <if test="shouldTime != null">
+        shouldTime,
+      </if>
+      <if test="terms != null">
+        terms,
+      </if>
+      <if test="repaidCurrentAmt != null">
+        repaidCurrentAmt,
+      </if>
+      <if test="remainCurrentAmt != null">
+        remainCurrentAmt,
+      </if>
+      <if test="earlyCurrentAmt != null">
+        earlyCurrentAmt,
+      </if>
+      <if test="shouldPenalty != null">
+        shouldPenalty,
+      </if>
+      <if test="shouldLiqui != null">
+        shouldLiqui,
+      </if>
+      <if test="shouldLatefee != null">
+        shouldLatefee,
+      </if>
+      <if test="alsoPenalty != null">
+        alsoPenalty,
+      </if>
+      <if test="alsoLiqui != null">
+        alsoLiqui,
+      </if>
+      <if test="alsoLatefee != null">
+        alsoLatefee,
+      </if>
+      <if test="breaksPenalty != null">
+        breaksPenalty,
+      </if>
+      <if test="breaksLiqui != null">
+        breaksLiqui,
+      </if>
+      <if test="breaksLatefee != null">
+        breaksLatefee,
+      </if>
+      <if test="remainPenalty != null">
+        remainPenalty,
+      </if>
+      <if test="remainLiqui != null">
+        remainLiqui,
+      </if>
+      <if test="remainLatefee != null">
+        remainLatefee,
+      </if>
+      <if test="currentOverDueDays != null">
+        currentOverDueDays,
+      </if>
+      <if test="tremStatus != null">
+        tremStatus,
+      </if>
+      <if test="tremServicesCharge != null">
+        tremServicesCharge,
+      </if>
+      <if test="payoffTime != null">
+        payoffTime,
+      </if>
+      <if test="repayType != null">
+        repayType,
+      </if>
+      <if test="mgmtFee != null">
+        mgmtFee,
+      </if>
+      <if test="leftPrincipal != null">
+        leftPrincipal,
+      </if>
+      <if test="leftInterest != null">
+        leftInterest,
+      </if>
+      <if test="repaidPrincipal != null">
+        repaidPrincipal,
+      </if>
+      <if test="repaidInterest != null">
+        repaidInterest,
+      </if>
+      <if test="repaidMgmtFee != null">
+        repaidMgmtFee,
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        t0EarlyServiceFee,
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        t0EarlyServiceFeeOverdueInterest,
+      </if>
+      <if test="leftT0EarlyServiceFee != null">
+        leftT0EarlyServiceFee,
+      </if>
+      <if test="leftT0EarlyServiceFeeOverdueInterest != null">
+        leftT0EarlyServiceFeeOverdueInterest,
+      </if>
+      <if test="breaksT0EarlyServiceFee != null">
+        breaksT0EarlyServiceFee,
+      </if>
+      <if test="breaksT0EarlyServiceFeeOverdueInterest != null">
+        breaksT0EarlyServiceFeeOverdueInterest,
+      </if>
+      <if test="guaranteeDeposit != null">
+        guaranteeDeposit,
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        guaranteeDepositServiceFee,
+      </if>
+      <if test="leftGuaranteeDeposit != null">
+        leftGuaranteeDeposit,
+      </if>
+      <if test="leftGuaranteeDepositServiceFee != null">
+        leftGuaranteeDepositServiceFee,
+      </if>
+      <if test="breaksGuaranteeDeposit != null">
+        breaksGuaranteeDeposit,
+      </if>
+      <if test="breaksGuaranteeDepositServiceFee != null">
+        breaksGuaranteeDepositServiceFee,
+      </if>
+      <if test="funderOverdueInterest != null">
+        funderOverdueInterest,
+      </if>
+      <if test="leftFunderOverdueInterest != null">
+        leftFunderOverdueInterest,
+      </if>
+      <if test="breaksFunderOverdueInterest != null">
+        breaksFunderOverdueInterest,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="pmtAmt != null">
+        #{pmtAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="remainTotalAmt != null">
+        #{remainTotalAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="penalty != null">
+        #{penalty,jdbcType=DECIMAL},
+      </if>
+      <if test="liqui != null">
+        #{liqui,jdbcType=DECIMAL},
+      </if>
+      <if test="termNeedAmt != null">
+        #{termNeedAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="compenGold != null">
+        #{compenGold,jdbcType=DECIMAL},
+      </if>
+      <if test="compenRecei != null">
+        #{compenRecei,jdbcType=DECIMAL},
+      </if>
+      <if test="amtAfterCompen != null">
+        #{amtAfterCompen,jdbcType=DECIMAL},
+      </if>
+      <if test="actualRepayDate != null">
+        #{actualRepayDate,jdbcType=DATE},
+      </if>
+      <if test="isOverdue != null">
+        #{isOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="isPayPrincipal != null">
+        #{isPayPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="dealDetail != null">
+        #{dealDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="reliefInfo != null">
+        #{reliefInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldTime != null">
+        #{shouldTime,jdbcType=DATE},
+      </if>
+      <if test="terms != null">
+        #{terms,jdbcType=INTEGER},
+      </if>
+      <if test="repaidCurrentAmt != null">
+        #{repaidCurrentAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainCurrentAmt != null">
+        #{remainCurrentAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="earlyCurrentAmt != null">
+        #{earlyCurrentAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldPenalty != null">
+        #{shouldPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldLiqui != null">
+        #{shouldLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldLatefee != null">
+        #{shouldLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="alsoPenalty != null">
+        #{alsoPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="alsoLiqui != null">
+        #{alsoLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="alsoLatefee != null">
+        #{alsoLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksPenalty != null">
+        #{breaksPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksLiqui != null">
+        #{breaksLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksLatefee != null">
+        #{breaksLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="remainPenalty != null">
+        #{remainPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="remainLiqui != null">
+        #{remainLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="remainLatefee != null">
+        #{remainLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverDueDays != null">
+        #{currentOverDueDays,jdbcType=INTEGER},
+      </if>
+      <if test="tremStatus != null">
+        #{tremStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tremServicesCharge != null">
+        #{tremServicesCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="payoffTime != null">
+        #{payoffTime,jdbcType=DATE},
+      </if>
+      <if test="repayType != null">
+        #{repayType,jdbcType=VARCHAR},
+      </if>
+      <if test="mgmtFee != null">
+        #{mgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="leftPrincipal != null">
+        #{leftPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="leftInterest != null">
+        #{leftInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidPrincipal != null">
+        #{repaidPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidInterest != null">
+        #{repaidInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidMgmtFee != null">
+        #{repaidMgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="leftT0EarlyServiceFee != null">
+        #{leftT0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="leftT0EarlyServiceFeeOverdueInterest != null">
+        #{leftT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksT0EarlyServiceFee != null">
+        #{breaksT0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksT0EarlyServiceFeeOverdueInterest != null">
+        #{breaksT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDeposit != null">
+        #{guaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="leftGuaranteeDeposit != null">
+        #{leftGuaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="leftGuaranteeDepositServiceFee != null">
+        #{leftGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksGuaranteeDeposit != null">
+        #{breaksGuaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksGuaranteeDepositServiceFee != null">
+        #{breaksGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="funderOverdueInterest != null">
+        #{funderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="leftFunderOverdueInterest != null">
+        #{leftFunderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksFunderOverdueInterest != null">
+        #{breaksFunderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.Repaymentplan">
+    update am_repaymentplan
+    <set>
+      <if test="pmtAmt != null">
+        pmtAmt = #{pmtAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="remainTotalAmt != null">
+        remainTotalAmt = #{remainTotalAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="penalty != null">
+        penalty = #{penalty,jdbcType=DECIMAL},
+      </if>
+      <if test="liqui != null">
+        liqui = #{liqui,jdbcType=DECIMAL},
+      </if>
+      <if test="termNeedAmt != null">
+        termNeedAmt = #{termNeedAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="compenGold != null">
+        compenGold = #{compenGold,jdbcType=DECIMAL},
+      </if>
+      <if test="compenRecei != null">
+        compenRecei = #{compenRecei,jdbcType=DECIMAL},
+      </if>
+      <if test="amtAfterCompen != null">
+        amtAfterCompen = #{amtAfterCompen,jdbcType=DECIMAL},
+      </if>
+      <if test="actualRepayDate != null">
+        actualRepayDate = #{actualRepayDate,jdbcType=DATE},
+      </if>
+      <if test="isOverdue != null">
+        isOverdue = #{isOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="isPayPrincipal != null">
+        isPayPrincipal = #{isPayPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="dealDetail != null">
+        dealDetail = #{dealDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="reliefInfo != null">
+        reliefInfo = #{reliefInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldTime != null">
+        shouldTime = #{shouldTime,jdbcType=DATE},
+      </if>
+      <if test="terms != null">
+        terms = #{terms,jdbcType=INTEGER},
+      </if>
+      <if test="repaidCurrentAmt != null">
+        repaidCurrentAmt = #{repaidCurrentAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainCurrentAmt != null">
+        remainCurrentAmt = #{remainCurrentAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="earlyCurrentAmt != null">
+        earlyCurrentAmt = #{earlyCurrentAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldPenalty != null">
+        shouldPenalty = #{shouldPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldLiqui != null">
+        shouldLiqui = #{shouldLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldLatefee != null">
+        shouldLatefee = #{shouldLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="alsoPenalty != null">
+        alsoPenalty = #{alsoPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="alsoLiqui != null">
+        alsoLiqui = #{alsoLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="alsoLatefee != null">
+        alsoLatefee = #{alsoLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksPenalty != null">
+        breaksPenalty = #{breaksPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksLiqui != null">
+        breaksLiqui = #{breaksLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksLatefee != null">
+        breaksLatefee = #{breaksLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="remainPenalty != null">
+        remainPenalty = #{remainPenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="remainLiqui != null">
+        remainLiqui = #{remainLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="remainLatefee != null">
+        remainLatefee = #{remainLatefee,jdbcType=DECIMAL},
+      </if>
+      <if test="currentOverDueDays != null">
+        currentOverDueDays = #{currentOverDueDays,jdbcType=INTEGER},
+      </if>
+      <if test="tremStatus != null">
+        tremStatus = #{tremStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tremServicesCharge != null">
+        tremServicesCharge = #{tremServicesCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="payoffTime != null">
+        payoffTime = #{payoffTime,jdbcType=DATE},
+      </if>
+      <if test="repayType != null">
+        repayType = #{repayType,jdbcType=VARCHAR},
+      </if>
+      <if test="mgmtFee != null">
+        mgmtFee = #{mgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="leftPrincipal != null">
+        leftPrincipal = #{leftPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="leftInterest != null">
+        leftInterest = #{leftInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidPrincipal != null">
+        repaidPrincipal = #{repaidPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidInterest != null">
+        repaidInterest = #{repaidInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidMgmtFee != null">
+        repaidMgmtFee = #{repaidMgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        t0EarlyServiceFee = #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        t0EarlyServiceFeeOverdueInterest = #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="leftT0EarlyServiceFee != null">
+        leftT0EarlyServiceFee = #{leftT0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="leftT0EarlyServiceFeeOverdueInterest != null">
+        leftT0EarlyServiceFeeOverdueInterest = #{leftT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksT0EarlyServiceFee != null">
+        breaksT0EarlyServiceFee = #{breaksT0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksT0EarlyServiceFeeOverdueInterest != null">
+        breaksT0EarlyServiceFeeOverdueInterest = #{breaksT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDeposit != null">
+        guaranteeDeposit = #{guaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        guaranteeDepositServiceFee = #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="leftGuaranteeDeposit != null">
+        leftGuaranteeDeposit = #{leftGuaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="leftGuaranteeDepositServiceFee != null">
+        leftGuaranteeDepositServiceFee = #{leftGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksGuaranteeDeposit != null">
+        breaksGuaranteeDeposit = #{breaksGuaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksGuaranteeDepositServiceFee != null">
+        breaksGuaranteeDepositServiceFee = #{breaksGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="funderOverdueInterest != null">
+        funderOverdueInterest = #{funderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="leftFunderOverdueInterest != null">
+        leftFunderOverdueInterest = #{leftFunderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="breaksFunderOverdueInterest != null">
+        breaksFunderOverdueInterest = #{breaksFunderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.Repaymentplan">
+    update am_repaymentplan
+    set pmtAmt = #{pmtAmt,jdbcType=DECIMAL},
+      principal = #{principal,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      remainTotalAmt = #{remainTotalAmt,jdbcType=DECIMAL},
+      penalty = #{penalty,jdbcType=DECIMAL},
+      liqui = #{liqui,jdbcType=DECIMAL},
+      termNeedAmt = #{termNeedAmt,jdbcType=DECIMAL},
+      compenGold = #{compenGold,jdbcType=DECIMAL},
+      compenRecei = #{compenRecei,jdbcType=DECIMAL},
+      amtAfterCompen = #{amtAfterCompen,jdbcType=DECIMAL},
+      actualRepayDate = #{actualRepayDate,jdbcType=DATE},
+      isOverdue = #{isOverdue,jdbcType=VARCHAR},
+      isPayPrincipal = #{isPayPrincipal,jdbcType=VARCHAR},
+      dealDetail = #{dealDetail,jdbcType=VARCHAR},
+      reliefInfo = #{reliefInfo,jdbcType=VARCHAR},
+      shouldTime = #{shouldTime,jdbcType=DATE},
+      terms = #{terms,jdbcType=INTEGER},
+      repaidCurrentAmt = #{repaidCurrentAmt,jdbcType=DECIMAL},
+      remainCurrentAmt = #{remainCurrentAmt,jdbcType=DECIMAL},
+      earlyCurrentAmt = #{earlyCurrentAmt,jdbcType=DECIMAL},
+      shouldPenalty = #{shouldPenalty,jdbcType=DECIMAL},
+      shouldLiqui = #{shouldLiqui,jdbcType=DECIMAL},
+      shouldLatefee = #{shouldLatefee,jdbcType=DECIMAL},
+      alsoPenalty = #{alsoPenalty,jdbcType=DECIMAL},
+      alsoLiqui = #{alsoLiqui,jdbcType=DECIMAL},
+      alsoLatefee = #{alsoLatefee,jdbcType=DECIMAL},
+      breaksPenalty = #{breaksPenalty,jdbcType=DECIMAL},
+      breaksLiqui = #{breaksLiqui,jdbcType=DECIMAL},
+      breaksLatefee = #{breaksLatefee,jdbcType=DECIMAL},
+      remainPenalty = #{remainPenalty,jdbcType=DECIMAL},
+      remainLiqui = #{remainLiqui,jdbcType=DECIMAL},
+      remainLatefee = #{remainLatefee,jdbcType=DECIMAL},
+      currentOverDueDays = #{currentOverDueDays,jdbcType=INTEGER},
+      tremStatus = #{tremStatus,jdbcType=VARCHAR},
+      tremServicesCharge = #{tremServicesCharge,jdbcType=DECIMAL},
+      payoffTime = #{payoffTime,jdbcType=DATE},
+      repayType = #{repayType,jdbcType=VARCHAR},
+      mgmtFee = #{mgmtFee,jdbcType=DECIMAL},
+      leftPrincipal = #{leftPrincipal,jdbcType=DECIMAL},
+      leftInterest = #{leftInterest,jdbcType=DECIMAL},
+      repaidPrincipal = #{repaidPrincipal,jdbcType=DECIMAL},
+      repaidInterest = #{repaidInterest,jdbcType=DECIMAL},
+      repaidMgmtFee = #{repaidMgmtFee,jdbcType=DECIMAL},
+      t0EarlyServiceFee = #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      t0EarlyServiceFeeOverdueInterest = #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      leftT0EarlyServiceFee = #{leftT0EarlyServiceFee,jdbcType=DECIMAL},
+      leftT0EarlyServiceFeeOverdueInterest = #{leftT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      breaksT0EarlyServiceFee = #{breaksT0EarlyServiceFee,jdbcType=DECIMAL},
+      breaksT0EarlyServiceFeeOverdueInterest = #{breaksT0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      guaranteeDeposit = #{guaranteeDeposit,jdbcType=DECIMAL},
+      guaranteeDepositServiceFee = #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      leftGuaranteeDeposit = #{leftGuaranteeDeposit,jdbcType=DECIMAL},
+      leftGuaranteeDepositServiceFee = #{leftGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      breaksGuaranteeDeposit = #{breaksGuaranteeDeposit,jdbcType=DECIMAL},
+      breaksGuaranteeDepositServiceFee = #{breaksGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      funderOverdueInterest = #{funderOverdueInterest,jdbcType=DECIMAL},
+      leftFunderOverdueInterest = #{leftFunderOverdueInterest,jdbcType=DECIMAL},
+      breaksFunderOverdueInterest = #{breaksFunderOverdueInterest,jdbcType=DECIMAL},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </update>
+</mapper>

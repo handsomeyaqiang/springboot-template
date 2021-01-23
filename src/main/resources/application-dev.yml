@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://10.255.33.6:3306/am_data?useUnicode=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: etluser
+    password: etluser
+    driver-class-name: com.mysql.jdbc.Driver
+
+base:
+  imagePath: D://mail/
+logging:
+  path: D:/log
+  level:
+    com.qingningnet.dao: debug
+
+rrd:
+  sendUrl: https://lcl-open-dev.creditcloud.com/open/loan-receive

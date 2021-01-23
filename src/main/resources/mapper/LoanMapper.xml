@@ -1,0 +1,1244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.LoanMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.Loan">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="contNo" jdbcType="INTEGER" property="contNo" />
+    <result column="serviceCode" jdbcType="CHAR" property="serviceCode" />
+    <result column="signSalesDepId" jdbcType="CHAR" property="signSalesDepId" />
+    <result column="loanType" jdbcType="VARCHAR" property="loanType" />
+    <result column="loanState" jdbcType="VARCHAR" property="loanState" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+    <result column="terms" jdbcType="INTEGER" property="terms" />
+    <result column="pactMoney" jdbcType="DECIMAL" property="pactMoney" />
+    <result column="grantMoney" jdbcType="DECIMAL" property="grantMoney" />
+    <result column="grantTime" jdbcType="TIMESTAMP" property="grantTime" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
+    <result column="collectFlag" jdbcType="VARCHAR" property="collectFlag" />
+    <result column="signDate" jdbcType="VARCHAR" property="signDate" />
+    <result column="retuKind" jdbcType="VARCHAR" property="retuKind" />
+    <result column="finishStatus" jdbcType="VARCHAR" property="finishStatus" />
+    <result column="remainPrincipal" jdbcType="DECIMAL" property="remainPrincipal" />
+    <result column="remainInterest" jdbcType="DECIMAL" property="remainInterest" />
+    <result column="overDueAmt" jdbcType="DECIMAL" property="overDueAmt" />
+    <result column="overDuePrincipal" jdbcType="DECIMAL" property="overDuePrincipal" />
+    <result column="overDueInterest" jdbcType="DECIMAL" property="overDueInterest" />
+    <result column="overDuePenalty" jdbcType="DECIMAL" property="overDuePenalty" />
+    <result column="overDueLiqui" jdbcType="DECIMAL" property="overDueLiqui" />
+    <result column="overDueDays" jdbcType="BIGINT" property="overDueDays" />
+    <result column="overDueDate" jdbcType="VARCHAR" property="overDueDate" />
+    <result column="storeProvince" jdbcType="VARCHAR" property="storeProvince" />
+    <result column="storeCity" jdbcType="VARCHAR" property="storeCity" />
+    <result column="storeCounty" jdbcType="VARCHAR" property="storeCounty" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="isTeleSale" jdbcType="VARCHAR" property="isTeleSale" />
+    <result column="remainPactMoney" jdbcType="DECIMAL" property="remainPactMoney" />
+    <result column="repaidTerms" jdbcType="INTEGER" property="repaidTerms" />
+    <result column="remainTerms" jdbcType="INTEGER" property="remainTerms" />
+    <result column="isOverdue" jdbcType="VARCHAR" property="isOverdue" />
+    <result column="paySubject" jdbcType="VARCHAR" property="paySubject" />
+    <result column="mgmtFee" jdbcType="DECIMAL" property="mgmtFee" />
+    <result column="overdueMgmtFee" jdbcType="DECIMAL" property="overdueMgmtFee" />
+    <result column="otherFee" jdbcType="DECIMAL" property="otherFee" />
+    <result column="loanTimes" jdbcType="INTEGER" property="loanTimes" />
+    <result column="loanPurpose" jdbcType="VARCHAR" property="loanPurpose" />
+    <result column="partnerUserId" jdbcType="INTEGER" property="partnerUserId" />
+    <result column="rankLable" jdbcType="VARCHAR" property="rankLable" />
+    <result column="mob" jdbcType="BIGINT" property="mob" />
+    <result column="loanLabel" jdbcType="VARCHAR" property="loanLabel" />
+    <result column="t0EarlyServiceFee" jdbcType="DECIMAL" property="t0EarlyServiceFee" />
+    <result column="overDueT0EarlyServiceFee" jdbcType="DECIMAL" property="overDueT0EarlyServiceFee" />
+    <result column="t0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="t0EarlyServiceFeeOverdueInterest" />
+    <result column="guaranteeDeposit" jdbcType="DECIMAL" property="guaranteeDeposit" />
+    <result column="guaranteeDepositServiceFee" jdbcType="DECIMAL" property="guaranteeDepositServiceFee" />
+    <result column="overDueGuaranteeDeposit" jdbcType="DECIMAL" property="overDueGuaranteeDeposit" />
+    <result column="overDueGuaranteeDepositServiceFee" jdbcType="DECIMAL" property="overDueGuaranteeDepositServiceFee" />
+    <result column="divisionMonthlyOverDueLevel" jdbcType="VARCHAR" property="divisionMonthlyOverDueLevel" />
+    <result column="isExistT0" jdbcType="VARCHAR" property="isExistT0" />
+    <result column="t0OverdueDays" jdbcType="INTEGER" property="t0OverdueDays" />
+    <result column="t0DueDate" jdbcType="VARCHAR" property="t0DueDate" />
+    <result column="t0OverdueAmount" jdbcType="DECIMAL" property="t0OverdueAmount" />
+    <result column="billCollectionMode" jdbcType="VARCHAR" property="billCollectionMode" />
+    <result column="hasT0Overdue" jdbcType="VARCHAR" property="hasT0Overdue" />
+    <result column="t0Funder" jdbcType="VARCHAR" property="t0Funder" />
+    <result column="overDueTerms" jdbcType="INTEGER" property="overDueTerms" />
+    <result column="statementDate" jdbcType="DATE" property="statementDate" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+
+    <result column="pushSubject" jdbcType="VARCHAR" property="pushSubject" />
+    <result column="lendChannel" jdbcType="VARCHAR" property="lendChannel" />
+    <result column="fundModel" jdbcType="VARCHAR" property="fundModel" />
+    <result column="funder" jdbcType="VARCHAR" property="funder" />
+    <result column="creditor" jdbcType="VARCHAR" property="creditor" />
+    <result column="firstAdvanceDate" jdbcType="VARCHAR" property="firstAdvanceDate" />
+    <result column="lastAdvanceDate" jdbcType="VARCHAR" property="lastAdvanceDate" />
+
+  </resultMap>
+  <resultMap id="customerResult" type="com.jikewang.send.domain.Customer">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="custName" jdbcType="VARCHAR" property="custName" />
+    <result column="idType" jdbcType="VARCHAR" property="idType" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="birtdate" jdbcType="DATE" property="birtdate" />
+    <result column="maritalStatus" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="hasChild" jdbcType="INTEGER" property="hasChild" />
+    <result column="hasHouse" jdbcType="INTEGER" property="hasHouse" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobilePhone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="regiseat" jdbcType="VARCHAR" property="regiseat" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="bankCardNo" jdbcType="VARCHAR" property="bankCardNo" />
+    <result column="bankName" jdbcType="VARCHAR" property="bankName" />
+    <result column="customerType" jdbcType="VARCHAR" property="customerType" />
+    <result column="caCompany" jdbcType="VARCHAR" property="caCompany" />
+    <result column="caType" jdbcType="VARCHAR" property="caType" />
+    <result column="caIndustryType" jdbcType="VARCHAR" property="caIndustryType" />
+    <result column="caDepartment" jdbcType="VARCHAR" property="caDepartment" />
+    <result column="caWorkPhone" jdbcType="VARCHAR" property="caWorkPhone" />
+    <result column="caDuty" jdbcType="VARCHAR" property="caDuty" />
+    <result column="caEnterTime" jdbcType="DATE" property="caEnterTime" />
+    <result column="caIncome" jdbcType="BIGINT" property="caIncome" />
+    <result column="agency" jdbcType="VARCHAR" property="agency" />
+    <result column="campus" jdbcType="VARCHAR" property="campus" />
+    <result column="viDriverLicense" jdbcType="VARCHAR" property="viDriverLicense" />
+    <result column="viPlateNum" jdbcType="VARCHAR" property="viPlateNum" />
+    <result column="viVehicleType" jdbcType="VARCHAR" property="viVehicleType" />
+    <result column="viFrameNum" jdbcType="VARCHAR" property="viFrameNum" />
+    <result column="viEngineNum" jdbcType="VARCHAR" property="viEngineNum" />
+    <result column="viFirstOncard" jdbcType="VARCHAR" property="viFirstOncard" />
+    <result column="viIsmort" jdbcType="VARCHAR" property="viIsmort" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <resultMap id="contactResult" type="com.jikewang.send.domain.Contact">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="contactName" jdbcType="VARCHAR" property="contactName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="contactType" jdbcType="VARCHAR" property="contactType" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="contactDepartment" jdbcType="VARCHAR" property="contactDepartment" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <resultMap id="paymentResult" type="com.jikewang.send.domain.Payment">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <id column="planId" jdbcType="INTEGER" property="planId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="repayTime" jdbcType="DATE" property="repayTime" />
+    <result column="retuKind" jdbcType="VARCHAR" property="retuKind" />
+    <result column="pmtAmt" jdbcType="DECIMAL" property="pmtAmt" />
+    <result column="repayTerm" jdbcType="INTEGER" property="repayTerm" />
+    <result column="repayPrincipal" jdbcType="DECIMAL" property="repayPrincipal" />
+    <result column="repayInterest" jdbcType="DECIMAL" property="repayInterest" />
+    <result column="penalty" jdbcType="DECIMAL" property="penalty" />
+    <result column="liqui" jdbcType="DECIMAL" property="liqui" />
+    <result column="dealDetail" jdbcType="DECIMAL" property="dealDetail" />
+    <result column="repayFee" jdbcType="DECIMAL" property="repayFee" />
+    <result column="repayOther" jdbcType="DECIMAL" property="repayOther" />
+    <result column="repayManage" jdbcType="DECIMAL" property="repayManage" />
+    <result column="overDueDays" jdbcType="INTEGER" property="overDueDays" />
+    <result column="functionCode" jdbcType="VARCHAR" property="functionCode" />
+    <result column="t0EarlyServiceFee" jdbcType="DECIMAL" property="t0EarlyServiceFee" />
+    <result column="t0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="t0EarlyServiceFeeOverdueInterest" />
+    <result column="guaranteeDeposit" jdbcType="DECIMAL" property="guaranteeDeposit" />
+    <result column="guaranteeDepositServiceFee" jdbcType="DECIMAL" property="guaranteeDepositServiceFee" />
+    <result column="funderOverdueInterest" jdbcType="DECIMAL" property="funderOverdueInterest" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap id="planResult" type="com.jikewang.send.domain.Repaymentplan">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <id column="planId" jdbcType="INTEGER" property="planId" />
+    <result column="pmtAmt" jdbcType="DECIMAL" property="pmtAmt" />
+    <result column="principal" jdbcType="DECIMAL" property="principal" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="remainTotalAmt" jdbcType="DECIMAL" property="remainTotalAmt" />
+    <result column="penalty" jdbcType="DECIMAL" property="penalty" />
+    <result column="liqui" jdbcType="DECIMAL" property="liqui" />
+    <result column="termNeedAmt" jdbcType="DECIMAL" property="termNeedAmt" />
+    <result column="compenGold" jdbcType="DECIMAL" property="compenGold" />
+    <result column="compenRecei" jdbcType="DECIMAL" property="compenRecei" />
+    <result column="amtAfterCompen" jdbcType="DECIMAL" property="amtAfterCompen" />
+    <result column="actualRepayDate" jdbcType="DATE" property="actualRepayDate" />
+    <result column="isOverdue" jdbcType="VARCHAR" property="isOverdue" />
+    <result column="isPayPrincipal" jdbcType="VARCHAR" property="isPayPrincipal" />
+    <result column="dealDetail" jdbcType="VARCHAR" property="dealDetail" />
+    <result column="reliefInfo" jdbcType="VARCHAR" property="reliefInfo" />
+    <result column="shouldTime" jdbcType="DATE" property="shouldTime" />
+    <result column="terms" jdbcType="INTEGER" property="terms" />
+    <result column="repaidCurrentAmt" jdbcType="DECIMAL" property="repaidCurrentAmt" />
+    <result column="remainCurrentAmt" jdbcType="DECIMAL" property="remainCurrentAmt" />
+    <result column="earlyCurrentAmt" jdbcType="DECIMAL" property="earlyCurrentAmt" />
+    <result column="shouldPenalty" jdbcType="DECIMAL" property="shouldPenalty" />
+    <result column="shouldLiqui" jdbcType="DECIMAL" property="shouldLiqui" />
+    <result column="shouldLatefee" jdbcType="DECIMAL" property="shouldLatefee" />
+    <result column="alsoPenalty" jdbcType="DECIMAL" property="alsoPenalty" />
+    <result column="alsoLiqui" jdbcType="DECIMAL" property="alsoLiqui" />
+    <result column="alsoLatefee" jdbcType="DECIMAL" property="alsoLatefee" />
+    <result column="breaksPenalty" jdbcType="DECIMAL" property="breaksPenalty" />
+    <result column="breaksLiqui" jdbcType="DECIMAL" property="breaksLiqui" />
+    <result column="breaksLatefee" jdbcType="DECIMAL" property="breaksLatefee" />
+    <result column="remainPenalty" jdbcType="DECIMAL" property="remainPenalty" />
+    <result column="remainLiqui" jdbcType="DECIMAL" property="remainLiqui" />
+    <result column="remainLatefee" jdbcType="DECIMAL" property="remainLatefee" />
+    <result column="currentOverDueDays" jdbcType="INTEGER" property="currentOverDueDays" />
+    <result column="tremStatus" jdbcType="VARCHAR" property="tremStatus" />
+    <result column="tremServicesCharge" jdbcType="DECIMAL" property="tremServicesCharge" />
+    <result column="payoffTime" jdbcType="DATE" property="payoffTime" />
+    <result column="repayType" jdbcType="VARCHAR" property="repayType" />
+    <result column="mgmtFee" jdbcType="DECIMAL" property="mgmtFee" />
+    <result column="leftPrincipal" jdbcType="DECIMAL" property="leftPrincipal" />
+    <result column="leftInterest" jdbcType="DECIMAL" property="leftInterest" />
+    <result column="repaidPrincipal" jdbcType="DECIMAL" property="repaidPrincipal" />
+    <result column="repaidInterest" jdbcType="DECIMAL" property="repaidInterest" />
+    <result column="repaidMgmtFee" jdbcType="DECIMAL" property="repaidMgmtFee" />
+    <result column="t0EarlyServiceFee" jdbcType="DECIMAL" property="t0EarlyServiceFee" />
+    <result column="t0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="t0EarlyServiceFeeOverdueInterest" />
+    <result column="leftT0EarlyServiceFee" jdbcType="DECIMAL" property="leftT0EarlyServiceFee" />
+    <result column="leftT0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="leftT0EarlyServiceFeeOverdueInterest" />
+    <result column="breaksT0EarlyServiceFee" jdbcType="DECIMAL" property="breaksT0EarlyServiceFee" />
+    <result column="breaksT0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="breaksT0EarlyServiceFeeOverdueInterest" />
+    <result column="guaranteeDeposit" jdbcType="DECIMAL" property="guaranteeDeposit" />
+    <result column="guaranteeDepositServiceFee" jdbcType="DECIMAL" property="guaranteeDepositServiceFee" />
+    <result column="leftGuaranteeDeposit" jdbcType="DECIMAL" property="leftGuaranteeDeposit" />
+    <result column="leftGuaranteeDepositServiceFee" jdbcType="DECIMAL" property="leftGuaranteeDepositServiceFee" />
+    <result column="breaksGuaranteeDeposit" jdbcType="DECIMAL" property="breaksGuaranteeDeposit" />
+    <result column="breaksGuaranteeDepositServiceFee" jdbcType="DECIMAL" property="breaksGuaranteeDepositServiceFee" />
+    <result column="funderOverdueInterest" jdbcType="DECIMAL" property="funderOverdueInterest" />
+    <result column="leftFunderOverdueInterest" jdbcType="DECIMAL" property="leftFunderOverdueInterest" />
+    <result column="breaksFunderOverdueInterest" jdbcType="DECIMAL" property="breaksFunderOverdueInterest" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="ExtendsResultMap" type="com.jikewang.send.domain.Loan" extends="BaseResultMap">
+    <association property="customer" resultMap="customerResult" columnPrefix="cr_" />
+    <collection property="contacts" ofType="com.jikewang.send.domain.Contact" resultMap="contactResult" columnPrefix="ct_" />
+    <collection property="payments" ofType="com.jikewang.send.domain.Payment" resultMap="paymentResult" columnPrefix="pt_" />
+    <collection property="repaymentplans" ofType="com.jikewang.send.domain.Repaymentplan" resultMap="planResult" columnPrefix="rn_" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    acctNo, idNo, contNo, serviceCode, signSalesDepId, loanType, loanState, rate, terms, 
+    pactMoney, grantMoney, grantTime, purpose, collectFlag, signDate, retuKind, finishStatus, 
+    remainPrincipal, remainInterest, overDueAmt, overDuePrincipal, overDueInterest, overDuePenalty, 
+    overDueLiqui, overDueDays, overDueDate, storeProvince, storeCity, storeCounty, mark, 
+    isTeleSale, remainPactMoney, repaidTerms, remainTerms, isOverdue, paySubject, mgmtFee, 
+    overdueMgmtFee, otherFee, loanTimes, loanPurpose, partnerUserId, rankLable, mob, 
+    loanLabel, t0EarlyServiceFee, overDueT0EarlyServiceFee, t0EarlyServiceFeeOverdueInterest, 
+    guaranteeDeposit, guaranteeDepositServiceFee, overDueGuaranteeDeposit, overDueGuaranteeDepositServiceFee, 
+    divisionMonthlyOverDueLevel, isExistT0, t0OverdueDays, t0DueDate, t0OverdueAmount, 
+    billCollectionMode, hasT0Overdue, t0Funder, overDueTerms, statementDate, UpdateTime,
+    pushSubject,lendChannel,fundModel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from am_loan
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </select>
+  <select id="findLoanLatest" resultType="java.lang.Integer">
+    SELECT
+    distinct acctNo
+    FROM
+    am_loan
+    where date(UpdateTime) = #{dt}
+  </select>
+  <select id="query" resultMap="BaseResultMap" >
+    SELECT
+      ln.acctNo,
+      ln.idNo,
+      ln.contNo,
+      ln.serviceCode,
+      ln.signSalesDepId,
+      ln.loanType,
+      ln.loanState,
+      ln.rate,
+      ln.terms,
+      ln.pactMoney,
+      ln.grantMoney,
+      ln.grantTime,
+      ln.purpose,
+      ln.collectFlag,
+      ln.signDate,
+      ln.retuKind,
+      ln.finishStatus,
+      ln.remainPrincipal,
+      ln.remainInterest,
+      ln.overDueAmt,
+      ln.overDuePrincipal,
+      ln.overDueInterest,
+      ln.overDuePenalty,
+      ln.overDueLiqui,
+      ln.overDueDays,
+      ln.overDueDate,
+      ln.storeProvince,
+      ln.storeCity,
+      ln.storeCounty,
+      ln.mark,
+      ln.isTeleSale,
+      ln.remainPactMoney,
+      ln.repaidTerms,
+      ln.remainTerms,
+      ln.isOverdue,
+      ln.paySubject,
+      ln.mgmtFee,
+      ln.overdueMgmtFee,
+      ln.otherFee,
+      ln.loanTimes,
+      ln.loanPurpose,
+      ln.partnerUserId,
+      ln.rankLable,
+      ln.mob,
+      ln.loanLabel,
+      ln.t0EarlyServiceFee,
+      ln.overDueT0EarlyServiceFee,
+      ln.t0EarlyServiceFeeOverdueInterest,
+      ln.guaranteeDeposit,
+      ln.guaranteeDepositServiceFee,
+      ln.overDueGuaranteeDeposit,
+      ln.overDueGuaranteeDepositServiceFee,
+      ln.divisionMonthlyOverDueLevel,
+      ln.isExistT0,
+      ln.t0OverdueDays,
+      ln.t0DueDate,
+      ln.t0OverdueAmount,
+      ln.billCollectionMode,
+      ln.hasT0Overdue,
+      ln.t0Funder,
+      ln.overDueTerms,
+      ln.statementDate,
+      ln.pushSubject,
+      ln.lendChannel,
+      ln.fundModel,
+      ln.funder,
+      ln.creditor
+    FROM
+    am_loan ln
+    where ln.acctNo in
+    <foreach collection="acctNos" open="(" close=")" separator="," item="acctNo">
+      #{acctNo}
+    </foreach>
+  </select>
+
+  <select id="find" resultMap="ExtendsResultMap" >
+    SELECT
+    ln.acctNo,
+    ln.idNo,
+    ln.contNo,
+    ln.serviceCode,
+    ln.signSalesDepId,
+    ln.loanType,
+    ln.loanState,
+    ln.rate,
+    ln.terms,
+    ln.pactMoney,
+    ln.grantMoney,
+    ln.grantTime,
+    ln.purpose,
+    ln.collectFlag,
+    ln.signDate,
+    ln.retuKind,
+    ln.finishStatus,
+    ln.remainPrincipal,
+    ln.remainInterest,
+    ln.overDueAmt,
+    ln.overDuePrincipal,
+    ln.overDueInterest,
+    ln.overDuePenalty,
+    ln.overDueLiqui,
+    ln.overDueDays,
+    ln.overDueDate,
+    ln.storeProvince,
+    ln.storeCity,
+    ln.storeCounty,
+    ln.mark,
+    ln.isTeleSale,
+    ln.remainPactMoney,
+    ln.repaidTerms,
+    ln.remainTerms,
+    ln.isOverdue,
+    ln.paySubject,
+    ln.mgmtFee,
+    ln.overdueMgmtFee,
+    ln.otherFee,
+    ln.loanTimes,
+    ln.loanPurpose,
+    ln.partnerUserId,
+    ln.rankLable,
+    ln.mob,
+    ln.loanLabel,
+    ln.t0EarlyServiceFee,
+    ln.overDueT0EarlyServiceFee,
+    ln.t0EarlyServiceFeeOverdueInterest,
+    ln.guaranteeDeposit,
+    ln.guaranteeDepositServiceFee,
+    ln.overDueGuaranteeDeposit,
+    ln.overDueGuaranteeDepositServiceFee,
+    ln.divisionMonthlyOverDueLevel,
+    ln.isExistT0,
+    ln.t0OverdueDays,
+    ln.t0DueDate,
+    ln.t0OverdueAmount,
+    ln.billCollectionMode,
+    ln.hasT0Overdue,
+    ln.t0Funder,
+    ln.overDueTerms,
+    ln.statementDate,
+    ln.pushSubject,
+    ln.lendChannel,
+    ln.fundModel,
+    ln.funder,
+    ln.creditor,
+    pt.acctNo  as  pt_acctNo,
+    pt.id  as  pt_id,
+    pt.planId  as  pt_planId,
+    pt.idNo  as  pt_idNo,
+    pt.repayTime  as  pt_repayTime,
+    pt.retuKind  as  pt_retuKind,
+    pt.pmtAmt  as  pt_pmtAmt,
+    pt.repayTerm  as  pt_repayTerm,
+    pt.repayPrincipal  as  pt_repayPrincipal,
+    pt.repayInterest  as  pt_repayInterest,
+    pt.penalty  as  pt_penalty,
+    pt.liqui  as  pt_liqui,
+    pt.dealDetail  as  pt_dealDetail,
+    pt.repayFee  as  pt_repayFee,
+    pt.repayOther  as  pt_repayOther,
+    pt.repayManage  as  pt_repayManage,
+    pt.overDueDays  as  pt_overDueDays,
+    pt.functionCode  as  pt_functionCode,
+    pt.t0EarlyServiceFee  as  pt_t0EarlyServiceFee,
+    pt.t0EarlyServiceFeeOverdueInterest  as  pt_t0EarlyServiceFeeOverdueInterest,
+    pt.guaranteeDeposit  as  pt_guaranteeDeposit,
+    pt.guaranteeDepositServiceFee  as  pt_guaranteeDepositServiceFee,
+    pt.funderOverdueInterest  as  pt_funderOverdueInterest,
+    rn.acctNo as rn_acctNo,
+    rn.planId as rn_planId,
+    rn.pmtAmt as rn_pmtAmt,
+    rn.principal as rn_principal,
+    rn.interest as rn_interest,
+    rn.remainTotalAmt as rn_remainTotalAmt,
+    rn.penalty as rn_penalty,
+    rn.liqui as rn_liqui,
+    rn.termNeedAmt as rn_termNeedAmt,
+    rn.compenGold as rn_compenGold,
+    rn.compenRecei as rn_compenRecei,
+    rn.amtAfterCompen as rn_amtAfterCompen,
+    rn.actualRepayDate as rn_actualRepayDate,
+    rn.isOverdue as rn_isOverdue,
+    rn.isPayPrincipal as rn_isPayPrincipal,
+    rn.dealDetail as rn_dealDetail,
+    rn.reliefInfo as rn_reliefInfo,
+    rn.shouldTime as rn_shouldTime,
+    rn.terms as rn_terms,
+    rn.repaidCurrentAmt as rn_repaidCurrentAmt,
+    rn.remainCurrentAmt as rn_remainCurrentAmt,
+    rn.earlyCurrentAmt as rn_earlyCurrentAmt,
+    rn.shouldPenalty as rn_shouldPenalty,
+    rn.shouldLiqui as rn_shouldLiqui,
+    rn.shouldLatefee as rn_shouldLatefee,
+    rn.alsoPenalty as rn_alsoPenalty,
+    rn.alsoLiqui as rn_alsoLiqui,
+    rn.alsoLatefee as rn_alsoLatefee,
+    rn.breaksPenalty as rn_breaksPenalty,
+    rn.breaksLiqui as rn_breaksLiqui,
+    rn.breaksLatefee as rn_breaksLatefee,
+    rn.remainPenalty as rn_remainPenalty,
+    rn.remainLiqui as rn_remainLiqui,
+    rn.remainLatefee as rn_remainLatefee,
+    rn.currentOverDueDays as rn_currentOverDueDays,
+    rn.tremStatus as rn_tremStatus,
+    rn.tremServicesCharge as rn_tremServicesCharge,
+    rn.payoffTime as rn_payoffTime,
+    rn.repayType as rn_repayType,
+    rn.mgmtFee as rn_mgmtFee,
+    rn.leftPrincipal as rn_leftPrincipal,
+    rn.leftInterest as rn_leftInterest,
+    rn.repaidPrincipal as rn_repaidPrincipal,
+    rn.repaidInterest as rn_repaidInterest,
+    rn.repaidMgmtFee as rn_repaidMgmtFee,
+    rn.t0EarlyServiceFee as rn_t0EarlyServiceFee,
+    rn.t0EarlyServiceFeeOverdueInterest as rn_t0EarlyServiceFeeOverdueInterest,
+    rn.leftT0EarlyServiceFee as rn_leftT0EarlyServiceFee,
+    rn.leftT0EarlyServiceFeeOverdueInterest as rn_leftT0EarlyServiceFeeOverdueInterest,
+    rn.breaksT0EarlyServiceFee as rn_breaksT0EarlyServiceFee,
+    rn.breaksT0EarlyServiceFeeOverdueInterest as rn_breaksT0EarlyServiceFeeOverdueInterest,
+    rn.guaranteeDeposit as rn_guaranteeDeposit,
+    rn.guaranteeDepositServiceFee as rn_guaranteeDepositServiceFee,
+    rn.leftGuaranteeDeposit as rn_leftGuaranteeDeposit,
+    rn.leftGuaranteeDepositServiceFee as rn_leftGuaranteeDepositServiceFee,
+    rn.breaksGuaranteeDeposit as rn_breaksGuaranteeDeposit,
+    rn.breaksGuaranteeDepositServiceFee as rn_breaksGuaranteeDepositServiceFee,
+    rn.funderOverdueInterest as rn_funderOverdueInterest,
+    rn.leftFunderOverdueInterest as rn_leftFunderOverdueInterest,
+    rn.breaksFunderOverdueInterest as rn_breaksFunderOverdueInterest,
+
+    ct.id	as ct_id,
+    ct.acctNo	as ct_acctNo,
+    ct.idNo	as ct_idNo,
+    ct.contactName	as ct_contactName,
+    ct.phone	as ct_phone,
+    ct.email	as ct_email,
+    ct.contactType	as ct_contactType,
+    ct.relationship	as ct_relationship,
+    ct.contactDepartment	as ct_contactDepartment,
+    ct.address	as ct_address,
+    cr.id as cr_id,
+    cr.acctNo as cr_acctNo,
+    cr.custName as cr_custName,
+    cr.idType as cr_idType,
+    cr.idNo as cr_idNo,
+    cr.gender as cr_gender,
+    cr.age as cr_age,
+    cr.birtdate as cr_birtdate,
+    cr.maritalStatus as cr_maritalStatus,
+    cr.education as cr_education,
+    cr.hasChild as cr_hasChild,
+    cr.hasHouse as cr_hasHouse,
+    cr.email as cr_email,
+    cr.mobilePhone as cr_mobilePhone,
+    cr.regiseat as cr_regiseat,
+    cr.address as cr_address,
+    cr.bankCardNo as cr_bankCardNo,
+    cr.bankName as cr_bankName,
+    cr.customerType as cr_customerType,
+    cr.caCompany as cr_caCompany,
+    cr.caType as cr_caType,
+    cr.caIndustryType as cr_caIndustryType,
+    cr.caDepartment as cr_caDepartment,
+    cr.caWorkPhone as cr_caWorkPhone,
+    cr.caDuty as cr_caDuty,
+    cr.caEnterTime as cr_caEnterTime,
+    cr.caIncome as cr_caIncome,
+    cr.agency as cr_agency,
+    cr.campus as cr_campus,
+    cr.viDriverLicense as cr_viDriverLicense,
+    cr.viPlateNum as cr_viPlateNum,
+    cr.viVehicleType as cr_viVehicleType,
+    cr.viFrameNum as cr_viFrameNum,
+    cr.viEngineNum as cr_viEngineNum,
+    cr.viFirstOncard as cr_viFirstOncard,
+    cr.viIsmort as cr_viIsmort
+    FROM
+    am_loan ln
+    left JOIN
+    am_repaymentplan rn
+    on  ln.acctNo = rn.acctNo  and date(rn.UpdateTime) = #{dt}
+    left JOIN
+    am_payment pt
+    on pt.planId = rn.planId
+    and ln.acctNo = pt.acctNo and date(pt.UpdateTime) = #{dt}
+    left JOIN
+    am_contact ct
+    on ln.acctNo= ct.acctNo and date(ct.lastUpdateTime) = #{dt}
+    left JOIN
+    am_customer cr
+    on ln.acctNo = cr.acctNo and date(cr.lastUpdateTime) = #{dt}
+    where ln.acctNo in
+    <foreach collection="acctNos" open="(" close=")" separator="," item="acctNo">
+      #{acctNo}
+    </foreach>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from am_loan
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.Loan">
+    insert into am_loan (acctNo, idNo, contNo, 
+      serviceCode, signSalesDepId, loanType, 
+      loanState, rate, terms, 
+      pactMoney, grantMoney, grantTime, 
+      purpose, collectFlag, signDate, 
+      retuKind, finishStatus, remainPrincipal, 
+      remainInterest, overDueAmt, overDuePrincipal, 
+      overDueInterest, overDuePenalty, overDueLiqui, 
+      overDueDays, overDueDate, storeProvince, 
+      storeCity, storeCounty, mark, 
+      isTeleSale, remainPactMoney, repaidTerms, 
+      remainTerms, isOverdue, paySubject, 
+      mgmtFee, overdueMgmtFee, otherFee, 
+      loanTimes, loanPurpose, partnerUserId, 
+      rankLable, mob, loanLabel, 
+      t0EarlyServiceFee, overDueT0EarlyServiceFee, 
+      t0EarlyServiceFeeOverdueInterest, guaranteeDeposit, 
+      guaranteeDepositServiceFee, overDueGuaranteeDeposit, 
+      overDueGuaranteeDepositServiceFee, divisionMonthlyOverDueLevel, 
+      isExistT0, t0OverdueDays, t0DueDate, 
+      t0OverdueAmount, billCollectionMode, hasT0Overdue, 
+      t0Funder, overDueTerms, statementDate, 
+      UpdateTime)
+    values (#{acctNo,jdbcType=INTEGER}, #{idNo,jdbcType=VARCHAR}, #{contNo,jdbcType=INTEGER}, 
+      #{serviceCode,jdbcType=CHAR}, #{signSalesDepId,jdbcType=CHAR}, #{loanType,jdbcType=VARCHAR}, 
+      #{loanState,jdbcType=VARCHAR}, #{rate,jdbcType=DECIMAL}, #{terms,jdbcType=INTEGER}, 
+      #{pactMoney,jdbcType=DECIMAL}, #{grantMoney,jdbcType=DECIMAL}, #{grantTime,jdbcType=TIMESTAMP}, 
+      #{purpose,jdbcType=VARCHAR}, #{collectFlag,jdbcType=VARCHAR}, #{signDate,jdbcType=VARCHAR}, 
+      #{retuKind,jdbcType=VARCHAR}, #{finishStatus,jdbcType=VARCHAR}, #{remainPrincipal,jdbcType=DECIMAL}, 
+      #{remainInterest,jdbcType=DECIMAL}, #{overDueAmt,jdbcType=DECIMAL}, #{overDuePrincipal,jdbcType=DECIMAL}, 
+      #{overDueInterest,jdbcType=DECIMAL}, #{overDuePenalty,jdbcType=DECIMAL}, #{overDueLiqui,jdbcType=DECIMAL}, 
+      #{overDueDays,jdbcType=BIGINT}, #{overDueDate,jdbcType=VARCHAR}, #{storeProvince,jdbcType=VARCHAR}, 
+      #{storeCity,jdbcType=VARCHAR}, #{storeCounty,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
+      #{isTeleSale,jdbcType=VARCHAR}, #{remainPactMoney,jdbcType=DECIMAL}, #{repaidTerms,jdbcType=INTEGER}, 
+      #{remainTerms,jdbcType=INTEGER}, #{isOverdue,jdbcType=VARCHAR}, #{paySubject,jdbcType=VARCHAR}, 
+      #{mgmtFee,jdbcType=DECIMAL}, #{overdueMgmtFee,jdbcType=DECIMAL}, #{otherFee,jdbcType=DECIMAL}, 
+      #{loanTimes,jdbcType=INTEGER}, #{loanPurpose,jdbcType=VARCHAR}, #{partnerUserId,jdbcType=INTEGER}, 
+      #{rankLable,jdbcType=VARCHAR}, #{mob,jdbcType=BIGINT}, #{loanLabel,jdbcType=VARCHAR}, 
+      #{t0EarlyServiceFee,jdbcType=DECIMAL}, #{overDueT0EarlyServiceFee,jdbcType=DECIMAL}, 
+      #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL}, #{guaranteeDeposit,jdbcType=DECIMAL}, 
+      #{guaranteeDepositServiceFee,jdbcType=DECIMAL}, #{overDueGuaranteeDeposit,jdbcType=DECIMAL}, 
+      #{overDueGuaranteeDepositServiceFee,jdbcType=DECIMAL}, #{divisionMonthlyOverDueLevel,jdbcType=VARCHAR}, 
+      #{isExistT0,jdbcType=VARCHAR}, #{t0OverdueDays,jdbcType=INTEGER}, #{t0DueDate,jdbcType=VARCHAR},
+      #{t0OverdueAmount,jdbcType=DECIMAL}, #{billCollectionMode,jdbcType=VARCHAR}, #{hasT0Overdue,jdbcType=VARCHAR}, 
+      #{t0Funder,jdbcType=VARCHAR}, #{overDueTerms,jdbcType=INTEGER}, #{statementDate,jdbcType=DATE}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.Loan">
+    insert into am_loan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        acctNo,
+      </if>
+      <if test="idNo != null">
+        idNo,
+      </if>
+      <if test="contNo != null">
+        contNo,
+      </if>
+      <if test="serviceCode != null">
+        serviceCode,
+      </if>
+      <if test="signSalesDepId != null">
+        signSalesDepId,
+      </if>
+      <if test="loanType != null">
+        loanType,
+      </if>
+      <if test="loanState != null">
+        loanState,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="terms != null">
+        terms,
+      </if>
+      <if test="pactMoney != null">
+        pactMoney,
+      </if>
+      <if test="grantMoney != null">
+        grantMoney,
+      </if>
+      <if test="grantTime != null">
+        grantTime,
+      </if>
+      <if test="purpose != null">
+        purpose,
+      </if>
+      <if test="collectFlag != null">
+        collectFlag,
+      </if>
+      <if test="signDate != null">
+        signDate,
+      </if>
+      <if test="retuKind != null">
+        retuKind,
+      </if>
+      <if test="finishStatus != null">
+        finishStatus,
+      </if>
+      <if test="remainPrincipal != null">
+        remainPrincipal,
+      </if>
+      <if test="remainInterest != null">
+        remainInterest,
+      </if>
+      <if test="overDueAmt != null">
+        overDueAmt,
+      </if>
+      <if test="overDuePrincipal != null">
+        overDuePrincipal,
+      </if>
+      <if test="overDueInterest != null">
+        overDueInterest,
+      </if>
+      <if test="overDuePenalty != null">
+        overDuePenalty,
+      </if>
+      <if test="overDueLiqui != null">
+        overDueLiqui,
+      </if>
+      <if test="overDueDays != null">
+        overDueDays,
+      </if>
+      <if test="overDueDate != null">
+        overDueDate,
+      </if>
+      <if test="storeProvince != null">
+        storeProvince,
+      </if>
+      <if test="storeCity != null">
+        storeCity,
+      </if>
+      <if test="storeCounty != null">
+        storeCounty,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="isTeleSale != null">
+        isTeleSale,
+      </if>
+      <if test="remainPactMoney != null">
+        remainPactMoney,
+      </if>
+      <if test="repaidTerms != null">
+        repaidTerms,
+      </if>
+      <if test="remainTerms != null">
+        remainTerms,
+      </if>
+      <if test="isOverdue != null">
+        isOverdue,
+      </if>
+      <if test="paySubject != null">
+        paySubject,
+      </if>
+      <if test="mgmtFee != null">
+        mgmtFee,
+      </if>
+      <if test="overdueMgmtFee != null">
+        overdueMgmtFee,
+      </if>
+      <if test="otherFee != null">
+        otherFee,
+      </if>
+      <if test="loanTimes != null">
+        loanTimes,
+      </if>
+      <if test="loanPurpose != null">
+        loanPurpose,
+      </if>
+      <if test="partnerUserId != null">
+        partnerUserId,
+      </if>
+      <if test="rankLable != null">
+        rankLable,
+      </if>
+      <if test="mob != null">
+        mob,
+      </if>
+      <if test="loanLabel != null">
+        loanLabel,
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        t0EarlyServiceFee,
+      </if>
+      <if test="overDueT0EarlyServiceFee != null">
+        overDueT0EarlyServiceFee,
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        t0EarlyServiceFeeOverdueInterest,
+      </if>
+      <if test="guaranteeDeposit != null">
+        guaranteeDeposit,
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        guaranteeDepositServiceFee,
+      </if>
+      <if test="overDueGuaranteeDeposit != null">
+        overDueGuaranteeDeposit,
+      </if>
+      <if test="overDueGuaranteeDepositServiceFee != null">
+        overDueGuaranteeDepositServiceFee,
+      </if>
+      <if test="divisionMonthlyOverDueLevel != null">
+        divisionMonthlyOverDueLevel,
+      </if>
+      <if test="isExistT0 != null">
+        isExistT0,
+      </if>
+      <if test="t0OverdueDays != null">
+        t0OverdueDays,
+      </if>
+      <if test="t0DueDate != null">
+        t0DueDate,
+      </if>
+      <if test="t0OverdueAmount != null">
+        t0OverdueAmount,
+      </if>
+      <if test="billCollectionMode != null">
+        billCollectionMode,
+      </if>
+      <if test="hasT0Overdue != null">
+        hasT0Overdue,
+      </if>
+      <if test="t0Funder != null">
+        t0Funder,
+      </if>
+      <if test="overDueTerms != null">
+        overDueTerms,
+      </if>
+      <if test="statementDate != null">
+        statementDate,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null">
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null">
+        #{contNo,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCode != null">
+        #{serviceCode,jdbcType=CHAR},
+      </if>
+      <if test="signSalesDepId != null">
+        #{signSalesDepId,jdbcType=CHAR},
+      </if>
+      <if test="loanType != null">
+        #{loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="loanState != null">
+        #{loanState,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        #{terms,jdbcType=INTEGER},
+      </if>
+      <if test="pactMoney != null">
+        #{pactMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="grantMoney != null">
+        #{grantMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="grantTime != null">
+        #{grantTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="collectFlag != null">
+        #{collectFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null">
+        #{signDate,jdbcType=VARCHAR},
+      </if>
+      <if test="retuKind != null">
+        #{retuKind,jdbcType=VARCHAR},
+      </if>
+      <if test="finishStatus != null">
+        #{finishStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remainPrincipal != null">
+        #{remainPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="remainInterest != null">
+        #{remainInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueAmt != null">
+        #{overDueAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="overDuePrincipal != null">
+        #{overDuePrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueInterest != null">
+        #{overDueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overDuePenalty != null">
+        #{overDuePenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueLiqui != null">
+        #{overDueLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueDays != null">
+        #{overDueDays,jdbcType=BIGINT},
+      </if>
+      <if test="overDueDate != null">
+        #{overDueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="storeProvince != null">
+        #{storeProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCity != null">
+        #{storeCity,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCounty != null">
+        #{storeCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="isTeleSale != null">
+        #{isTeleSale,jdbcType=VARCHAR},
+      </if>
+      <if test="remainPactMoney != null">
+        #{remainPactMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidTerms != null">
+        #{repaidTerms,jdbcType=INTEGER},
+      </if>
+      <if test="remainTerms != null">
+        #{remainTerms,jdbcType=INTEGER},
+      </if>
+      <if test="isOverdue != null">
+        #{isOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="paySubject != null">
+        #{paySubject,jdbcType=VARCHAR},
+      </if>
+      <if test="mgmtFee != null">
+        #{mgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueMgmtFee != null">
+        #{overdueMgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee != null">
+        #{otherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="loanTimes != null">
+        #{loanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="loanPurpose != null">
+        #{loanPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerUserId != null">
+        #{partnerUserId,jdbcType=INTEGER},
+      </if>
+      <if test="rankLable != null">
+        #{rankLable,jdbcType=VARCHAR},
+      </if>
+      <if test="mob != null">
+        #{mob,jdbcType=BIGINT},
+      </if>
+      <if test="loanLabel != null">
+        #{loanLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueT0EarlyServiceFee != null">
+        #{overDueT0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDeposit != null">
+        #{guaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueGuaranteeDeposit != null">
+        #{overDueGuaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueGuaranteeDepositServiceFee != null">
+        #{overDueGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="divisionMonthlyOverDueLevel != null">
+        #{divisionMonthlyOverDueLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="isExistT0 != null">
+        #{isExistT0,jdbcType=VARCHAR},
+      </if>
+      <if test="t0OverdueDays != null">
+        #{t0OverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="t0DueDate != null">
+        #{t0DueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="t0OverdueAmount != null">
+        #{t0OverdueAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="billCollectionMode != null">
+        #{billCollectionMode,jdbcType=VARCHAR},
+      </if>
+      <if test="hasT0Overdue != null">
+        #{hasT0Overdue,jdbcType=VARCHAR},
+      </if>
+      <if test="t0Funder != null">
+        #{t0Funder,jdbcType=VARCHAR},
+      </if>
+      <if test="overDueTerms != null">
+        #{overDueTerms,jdbcType=INTEGER},
+      </if>
+      <if test="statementDate != null">
+        #{statementDate,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.Loan">
+    update am_loan
+    <set>
+      <if test="idNo != null">
+        idNo = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contNo != null">
+        contNo = #{contNo,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCode != null">
+        serviceCode = #{serviceCode,jdbcType=CHAR},
+      </if>
+      <if test="signSalesDepId != null">
+        signSalesDepId = #{signSalesDepId,jdbcType=CHAR},
+      </if>
+      <if test="loanType != null">
+        loanType = #{loanType,jdbcType=VARCHAR},
+      </if>
+      <if test="loanState != null">
+        loanState = #{loanState,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        terms = #{terms,jdbcType=INTEGER},
+      </if>
+      <if test="pactMoney != null">
+        pactMoney = #{pactMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="grantMoney != null">
+        grantMoney = #{grantMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="grantTime != null">
+        grantTime = #{grantTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="collectFlag != null">
+        collectFlag = #{collectFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null">
+        signDate = #{signDate,jdbcType=VARCHAR},
+      </if>
+      <if test="retuKind != null">
+        retuKind = #{retuKind,jdbcType=VARCHAR},
+      </if>
+      <if test="finishStatus != null">
+        finishStatus = #{finishStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remainPrincipal != null">
+        remainPrincipal = #{remainPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="remainInterest != null">
+        remainInterest = #{remainInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueAmt != null">
+        overDueAmt = #{overDueAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="overDuePrincipal != null">
+        overDuePrincipal = #{overDuePrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueInterest != null">
+        overDueInterest = #{overDueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overDuePenalty != null">
+        overDuePenalty = #{overDuePenalty,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueLiqui != null">
+        overDueLiqui = #{overDueLiqui,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueDays != null">
+        overDueDays = #{overDueDays,jdbcType=BIGINT},
+      </if>
+      <if test="overDueDate != null">
+        overDueDate = #{overDueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="storeProvince != null">
+        storeProvince = #{storeProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCity != null">
+        storeCity = #{storeCity,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCounty != null">
+        storeCounty = #{storeCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="isTeleSale != null">
+        isTeleSale = #{isTeleSale,jdbcType=VARCHAR},
+      </if>
+      <if test="remainPactMoney != null">
+        remainPactMoney = #{remainPactMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidTerms != null">
+        repaidTerms = #{repaidTerms,jdbcType=INTEGER},
+      </if>
+      <if test="remainTerms != null">
+        remainTerms = #{remainTerms,jdbcType=INTEGER},
+      </if>
+      <if test="isOverdue != null">
+        isOverdue = #{isOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="paySubject != null">
+        paySubject = #{paySubject,jdbcType=VARCHAR},
+      </if>
+      <if test="mgmtFee != null">
+        mgmtFee = #{mgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueMgmtFee != null">
+        overdueMgmtFee = #{overdueMgmtFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee != null">
+        otherFee = #{otherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="loanTimes != null">
+        loanTimes = #{loanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="loanPurpose != null">
+        loanPurpose = #{loanPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerUserId != null">
+        partnerUserId = #{partnerUserId,jdbcType=INTEGER},
+      </if>
+      <if test="rankLable != null">
+        rankLable = #{rankLable,jdbcType=VARCHAR},
+      </if>
+      <if test="mob != null">
+        mob = #{mob,jdbcType=BIGINT},
+      </if>
+      <if test="loanLabel != null">
+        loanLabel = #{loanLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        t0EarlyServiceFee = #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueT0EarlyServiceFee != null">
+        overDueT0EarlyServiceFee = #{overDueT0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        t0EarlyServiceFeeOverdueInterest = #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDeposit != null">
+        guaranteeDeposit = #{guaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        guaranteeDepositServiceFee = #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueGuaranteeDeposit != null">
+        overDueGuaranteeDeposit = #{overDueGuaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueGuaranteeDepositServiceFee != null">
+        overDueGuaranteeDepositServiceFee = #{overDueGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="divisionMonthlyOverDueLevel != null">
+        divisionMonthlyOverDueLevel = #{divisionMonthlyOverDueLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="isExistT0 != null">
+        isExistT0 = #{isExistT0,jdbcType=VARCHAR},
+      </if>
+      <if test="t0OverdueDays != null">
+        t0OverdueDays = #{t0OverdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="t0DueDate != null">
+        t0DueDate = #{t0DueDate,jdbcType=VARCHAR},
+      </if>
+      <if test="t0OverdueAmount != null">
+        t0OverdueAmount = #{t0OverdueAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="billCollectionMode != null">
+        billCollectionMode = #{billCollectionMode,jdbcType=VARCHAR},
+      </if>
+      <if test="hasT0Overdue != null">
+        hasT0Overdue = #{hasT0Overdue,jdbcType=VARCHAR},
+      </if>
+      <if test="t0Funder != null">
+        t0Funder = #{t0Funder,jdbcType=VARCHAR},
+      </if>
+      <if test="overDueTerms != null">
+        overDueTerms = #{overDueTerms,jdbcType=INTEGER},
+      </if>
+      <if test="statementDate != null">
+        statementDate = #{statementDate,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.Loan">
+    update am_loan
+    set idNo = #{idNo,jdbcType=VARCHAR},
+      contNo = #{contNo,jdbcType=INTEGER},
+      serviceCode = #{serviceCode,jdbcType=CHAR},
+      signSalesDepId = #{signSalesDepId,jdbcType=CHAR},
+      loanType = #{loanType,jdbcType=VARCHAR},
+      loanState = #{loanState,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DECIMAL},
+      terms = #{terms,jdbcType=INTEGER},
+      pactMoney = #{pactMoney,jdbcType=DECIMAL},
+      grantMoney = #{grantMoney,jdbcType=DECIMAL},
+      grantTime = #{grantTime,jdbcType=TIMESTAMP},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      collectFlag = #{collectFlag,jdbcType=VARCHAR},
+      signDate = #{signDate,jdbcType=VARCHAR},
+      retuKind = #{retuKind,jdbcType=VARCHAR},
+      finishStatus = #{finishStatus,jdbcType=VARCHAR},
+      remainPrincipal = #{remainPrincipal,jdbcType=DECIMAL},
+      remainInterest = #{remainInterest,jdbcType=DECIMAL},
+      overDueAmt = #{overDueAmt,jdbcType=DECIMAL},
+      overDuePrincipal = #{overDuePrincipal,jdbcType=DECIMAL},
+      overDueInterest = #{overDueInterest,jdbcType=DECIMAL},
+      overDuePenalty = #{overDuePenalty,jdbcType=DECIMAL},
+      overDueLiqui = #{overDueLiqui,jdbcType=DECIMAL},
+      overDueDays = #{overDueDays,jdbcType=BIGINT},
+      overDueDate = #{overDueDate,jdbcType=VARCHAR},
+      storeProvince = #{storeProvince,jdbcType=VARCHAR},
+      storeCity = #{storeCity,jdbcType=VARCHAR},
+      storeCounty = #{storeCounty,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      isTeleSale = #{isTeleSale,jdbcType=VARCHAR},
+      remainPactMoney = #{remainPactMoney,jdbcType=DECIMAL},
+      repaidTerms = #{repaidTerms,jdbcType=INTEGER},
+      remainTerms = #{remainTerms,jdbcType=INTEGER},
+      isOverdue = #{isOverdue,jdbcType=VARCHAR},
+      paySubject = #{paySubject,jdbcType=VARCHAR},
+      mgmtFee = #{mgmtFee,jdbcType=DECIMAL},
+      overdueMgmtFee = #{overdueMgmtFee,jdbcType=DECIMAL},
+      otherFee = #{otherFee,jdbcType=DECIMAL},
+      loanTimes = #{loanTimes,jdbcType=INTEGER},
+      loanPurpose = #{loanPurpose,jdbcType=VARCHAR},
+      partnerUserId = #{partnerUserId,jdbcType=INTEGER},
+      rankLable = #{rankLable,jdbcType=VARCHAR},
+      mob = #{mob,jdbcType=BIGINT},
+      loanLabel = #{loanLabel,jdbcType=VARCHAR},
+      t0EarlyServiceFee = #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      overDueT0EarlyServiceFee = #{overDueT0EarlyServiceFee,jdbcType=DECIMAL},
+      t0EarlyServiceFeeOverdueInterest = #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      guaranteeDeposit = #{guaranteeDeposit,jdbcType=DECIMAL},
+      guaranteeDepositServiceFee = #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      overDueGuaranteeDeposit = #{overDueGuaranteeDeposit,jdbcType=DECIMAL},
+      overDueGuaranteeDepositServiceFee = #{overDueGuaranteeDepositServiceFee,jdbcType=DECIMAL},
+      divisionMonthlyOverDueLevel = #{divisionMonthlyOverDueLevel,jdbcType=VARCHAR},
+      isExistT0 = #{isExistT0,jdbcType=VARCHAR},
+      t0OverdueDays = #{t0OverdueDays,jdbcType=INTEGER},
+      t0DueDate = #{t0DueDate,jdbcType=VARCHAR},
+      t0OverdueAmount = #{t0OverdueAmount,jdbcType=DECIMAL},
+      billCollectionMode = #{billCollectionMode,jdbcType=VARCHAR},
+      hasT0Overdue = #{hasT0Overdue,jdbcType=VARCHAR},
+      t0Funder = #{t0Funder,jdbcType=VARCHAR},
+      overDueTerms = #{overDueTerms,jdbcType=INTEGER},
+      statementDate = #{statementDate,jdbcType=DATE},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </update>
+</mapper>

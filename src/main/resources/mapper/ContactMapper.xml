@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.ContactMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.Contact">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="contactName" jdbcType="VARCHAR" property="contactName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="contactType" jdbcType="VARCHAR" property="contactType" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="contactDepartment" jdbcType="VARCHAR" property="contactDepartment" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, acctNo, idNo, contactName, phone, email, contactType, relationship, contactDepartment, 
+    address, lastUpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from am_contact
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findLatest" resultType="java.lang.Integer">
+    SELECT
+    DISTINCT ct.acctNo
+    FROM
+    am_contact ct
+    left JOIN
+    am_customer cr
+    on ct.acctNo= cr.acctNo and date(cr.lastUpdateTime)=#{dt}
+    left JOIN
+    am_repaymentplan rn
+    on ct.acctNo = rn.acctNo and date(rn.UpdateTime)=#{dt}
+    where date(ct.lastUpdateTime)=#{dt}
+    and (cr.acctNo is null and  rn.acctNo is null)
+
+  </select>
+  <select id="find" resultMap="BaseResultMap">
+
+    select
+      *
+    FROM
+      am_contact ct
+    where
+     date(ct.lastUpdateTime) =#{dt}
+     and ct.acctNo in
+    <foreach collection="acctNos" open="(" close=")" separator="," item="acctNo">
+      #{acctNo}
+    </foreach>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from am_contact
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.Contact">
+    insert into am_contact (id, acctNo, idNo, 
+      contactName, phone, email, 
+      contactType, relationship, contactDepartment, 
+      address, lastUpdateTime)
+    values (#{id,jdbcType=INTEGER}, #{acctNo,jdbcType=INTEGER}, #{idNo,jdbcType=VARCHAR}, 
+      #{contactName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{contactType,jdbcType=VARCHAR}, #{relationship,jdbcType=VARCHAR}, #{contactDepartment,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.Contact">
+    insert into am_contact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="acctNo != null">
+        acctNo,
+      </if>
+      <if test="idNo != null">
+        idNo,
+      </if>
+      <if test="contactName != null">
+        contactName,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="contactType != null">
+        contactType,
+      </if>
+      <if test="relationship != null">
+        relationship,
+      </if>
+      <if test="contactDepartment != null">
+        contactDepartment,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="lastUpdateTime != null">
+        lastUpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null">
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null">
+        #{contactType,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="contactDepartment != null">
+        #{contactDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.Contact">
+    update am_contact
+    <set>
+      <if test="acctNo != null">
+        acctNo = #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null">
+        idNo = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null">
+        contactName = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null">
+        contactType = #{contactType,jdbcType=VARCHAR},
+      </if>
+      <if test="relationship != null">
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="contactDepartment != null">
+        contactDepartment = #{contactDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        lastUpdateTime = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.Contact">
+    update am_contact
+    set acctNo = #{acctNo,jdbcType=INTEGER},
+      idNo = #{idNo,jdbcType=VARCHAR},
+      contactName = #{contactName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      contactType = #{contactType,jdbcType=VARCHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      contactDepartment = #{contactDepartment,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      lastUpdateTime = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

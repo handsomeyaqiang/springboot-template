@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.Payment">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <id column="planId" jdbcType="INTEGER" property="planId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="repayTime" jdbcType="DATE" property="repayTime" />
+    <result column="retuKind" jdbcType="VARCHAR" property="retuKind" />
+    <result column="pmtAmt" jdbcType="DECIMAL" property="pmtAmt" />
+    <result column="repayTerm" jdbcType="INTEGER" property="repayTerm" />
+    <result column="repayPrincipal" jdbcType="DECIMAL" property="repayPrincipal" />
+    <result column="repayInterest" jdbcType="DECIMAL" property="repayInterest" />
+    <result column="penalty" jdbcType="DECIMAL" property="penalty" />
+    <result column="liqui" jdbcType="DECIMAL" property="liqui" />
+    <result column="dealDetail" jdbcType="DECIMAL" property="dealDetail" />
+    <result column="repayFee" jdbcType="DECIMAL" property="repayFee" />
+    <result column="repayOther" jdbcType="DECIMAL" property="repayOther" />
+    <result column="repayManage" jdbcType="DECIMAL" property="repayManage" />
+    <result column="overDueDays" jdbcType="INTEGER" property="overDueDays" />
+    <result column="functionCode" jdbcType="VARCHAR" property="functionCode" />
+    <result column="t0EarlyServiceFee" jdbcType="DECIMAL" property="t0EarlyServiceFee" />
+    <result column="t0EarlyServiceFeeOverdueInterest" jdbcType="DECIMAL" property="t0EarlyServiceFeeOverdueInterest" />
+    <result column="guaranteeDeposit" jdbcType="DECIMAL" property="guaranteeDeposit" />
+    <result column="guaranteeDepositServiceFee" jdbcType="DECIMAL" property="guaranteeDepositServiceFee" />
+    <result column="funderOverdueInterest" jdbcType="DECIMAL" property="funderOverdueInterest" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    acctNo, planId, id, idNo, repayTime, retuKind, pmtAmt, repayTerm, repayPrincipal, 
+    repayInterest, penalty, liqui, dealDetail, repayFee, repayOther, repayManage, overDueDays, 
+    functionCode, t0EarlyServiceFee, t0EarlyServiceFeeOverdueInterest, guaranteeDeposit, 
+    guaranteeDepositServiceFee, funderOverdueInterest, UpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.jikewang.send.domain.PaymentKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from am_payment
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.jikewang.send.domain.PaymentKey">
+    delete from am_payment
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.Payment">
+    insert into am_payment (acctNo, planId, id, 
+      idNo, repayTime, retuKind, 
+      pmtAmt, repayTerm, repayPrincipal, 
+      repayInterest, penalty, liqui, 
+      dealDetail, repayFee, repayOther, 
+      repayManage, overDueDays, functionCode, 
+      t0EarlyServiceFee, t0EarlyServiceFeeOverdueInterest, 
+      guaranteeDeposit, guaranteeDepositServiceFee, 
+      funderOverdueInterest, UpdateTime)
+    values (#{acctNo,jdbcType=INTEGER}, #{planId,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, 
+      #{idNo,jdbcType=VARCHAR}, #{repayTime,jdbcType=DATE}, #{retuKind,jdbcType=VARCHAR}, 
+      #{pmtAmt,jdbcType=DECIMAL}, #{repayTerm,jdbcType=INTEGER}, #{repayPrincipal,jdbcType=DECIMAL}, 
+      #{repayInterest,jdbcType=DECIMAL}, #{penalty,jdbcType=DECIMAL}, #{liqui,jdbcType=DECIMAL}, 
+      #{dealDetail,jdbcType=DECIMAL}, #{repayFee,jdbcType=DECIMAL}, #{repayOther,jdbcType=DECIMAL}, 
+      #{repayManage,jdbcType=DECIMAL}, #{overDueDays,jdbcType=INTEGER}, #{functionCode,jdbcType=VARCHAR}, 
+      #{t0EarlyServiceFee,jdbcType=DECIMAL}, #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL}, 
+      #{guaranteeDeposit,jdbcType=DECIMAL}, #{guaranteeDepositServiceFee,jdbcType=DECIMAL}, 
+      #{funderOverdueInterest,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.Payment">
+    insert into am_payment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        acctNo,
+      </if>
+      <if test="planId != null">
+        planId,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="idNo != null">
+        idNo,
+      </if>
+      <if test="repayTime != null">
+        repayTime,
+      </if>
+      <if test="retuKind != null">
+        retuKind,
+      </if>
+      <if test="pmtAmt != null">
+        pmtAmt,
+      </if>
+      <if test="repayTerm != null">
+        repayTerm,
+      </if>
+      <if test="repayPrincipal != null">
+        repayPrincipal,
+      </if>
+      <if test="repayInterest != null">
+        repayInterest,
+      </if>
+      <if test="penalty != null">
+        penalty,
+      </if>
+      <if test="liqui != null">
+        liqui,
+      </if>
+      <if test="dealDetail != null">
+        dealDetail,
+      </if>
+      <if test="repayFee != null">
+        repayFee,
+      </if>
+      <if test="repayOther != null">
+        repayOther,
+      </if>
+      <if test="repayManage != null">
+        repayManage,
+      </if>
+      <if test="overDueDays != null">
+        overDueDays,
+      </if>
+      <if test="functionCode != null">
+        functionCode,
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        t0EarlyServiceFee,
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        t0EarlyServiceFeeOverdueInterest,
+      </if>
+      <if test="guaranteeDeposit != null">
+        guaranteeDeposit,
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        guaranteeDepositServiceFee,
+      </if>
+      <if test="funderOverdueInterest != null">
+        funderOverdueInterest,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null">
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repayTime != null">
+        #{repayTime,jdbcType=DATE},
+      </if>
+      <if test="retuKind != null">
+        #{retuKind,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtAmt != null">
+        #{pmtAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="repayTerm != null">
+        #{repayTerm,jdbcType=INTEGER},
+      </if>
+      <if test="repayPrincipal != null">
+        #{repayPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="repayInterest != null">
+        #{repayInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="penalty != null">
+        #{penalty,jdbcType=DECIMAL},
+      </if>
+      <if test="liqui != null">
+        #{liqui,jdbcType=DECIMAL},
+      </if>
+      <if test="dealDetail != null">
+        #{dealDetail,jdbcType=DECIMAL},
+      </if>
+      <if test="repayFee != null">
+        #{repayFee,jdbcType=DECIMAL},
+      </if>
+      <if test="repayOther != null">
+        #{repayOther,jdbcType=DECIMAL},
+      </if>
+      <if test="repayManage != null">
+        #{repayManage,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueDays != null">
+        #{overDueDays,jdbcType=INTEGER},
+      </if>
+      <if test="functionCode != null">
+        #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDeposit != null">
+        #{guaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="funderOverdueInterest != null">
+        #{funderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.Payment">
+    update am_payment
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idNo != null">
+        idNo = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="repayTime != null">
+        repayTime = #{repayTime,jdbcType=DATE},
+      </if>
+      <if test="retuKind != null">
+        retuKind = #{retuKind,jdbcType=VARCHAR},
+      </if>
+      <if test="pmtAmt != null">
+        pmtAmt = #{pmtAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="repayTerm != null">
+        repayTerm = #{repayTerm,jdbcType=INTEGER},
+      </if>
+      <if test="repayPrincipal != null">
+        repayPrincipal = #{repayPrincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="repayInterest != null">
+        repayInterest = #{repayInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="penalty != null">
+        penalty = #{penalty,jdbcType=DECIMAL},
+      </if>
+      <if test="liqui != null">
+        liqui = #{liqui,jdbcType=DECIMAL},
+      </if>
+      <if test="dealDetail != null">
+        dealDetail = #{dealDetail,jdbcType=DECIMAL},
+      </if>
+      <if test="repayFee != null">
+        repayFee = #{repayFee,jdbcType=DECIMAL},
+      </if>
+      <if test="repayOther != null">
+        repayOther = #{repayOther,jdbcType=DECIMAL},
+      </if>
+      <if test="repayManage != null">
+        repayManage = #{repayManage,jdbcType=DECIMAL},
+      </if>
+      <if test="overDueDays != null">
+        overDueDays = #{overDueDays,jdbcType=INTEGER},
+      </if>
+      <if test="functionCode != null">
+        functionCode = #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="t0EarlyServiceFee != null">
+        t0EarlyServiceFee = #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="t0EarlyServiceFeeOverdueInterest != null">
+        t0EarlyServiceFeeOverdueInterest = #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDeposit != null">
+        guaranteeDeposit = #{guaranteeDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="guaranteeDepositServiceFee != null">
+        guaranteeDepositServiceFee = #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="funderOverdueInterest != null">
+        funderOverdueInterest = #{funderOverdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.Payment">
+    update am_payment
+    set id = #{id,jdbcType=INTEGER},
+      idNo = #{idNo,jdbcType=VARCHAR},
+      repayTime = #{repayTime,jdbcType=DATE},
+      retuKind = #{retuKind,jdbcType=VARCHAR},
+      pmtAmt = #{pmtAmt,jdbcType=DECIMAL},
+      repayTerm = #{repayTerm,jdbcType=INTEGER},
+      repayPrincipal = #{repayPrincipal,jdbcType=DECIMAL},
+      repayInterest = #{repayInterest,jdbcType=DECIMAL},
+      penalty = #{penalty,jdbcType=DECIMAL},
+      liqui = #{liqui,jdbcType=DECIMAL},
+      dealDetail = #{dealDetail,jdbcType=DECIMAL},
+      repayFee = #{repayFee,jdbcType=DECIMAL},
+      repayOther = #{repayOther,jdbcType=DECIMAL},
+      repayManage = #{repayManage,jdbcType=DECIMAL},
+      overDueDays = #{overDueDays,jdbcType=INTEGER},
+      functionCode = #{functionCode,jdbcType=VARCHAR},
+      t0EarlyServiceFee = #{t0EarlyServiceFee,jdbcType=DECIMAL},
+      t0EarlyServiceFeeOverdueInterest = #{t0EarlyServiceFeeOverdueInterest,jdbcType=DECIMAL},
+      guaranteeDeposit = #{guaranteeDeposit,jdbcType=DECIMAL},
+      guaranteeDepositServiceFee = #{guaranteeDepositServiceFee,jdbcType=DECIMAL},
+      funderOverdueInterest = #{funderOverdueInterest,jdbcType=DECIMAL},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+      and planId = #{planId,jdbcType=INTEGER}
+  </update>
+</mapper>

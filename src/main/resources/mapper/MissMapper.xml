@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.MissMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.Miss">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="dataTime" jdbcType="VARCHAR" property="dataTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, acctNo, dataTime, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from am_miss
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findMiss" resultType="java.lang.Integer">
+    SELECT
+      distinct acctNo
+    FROM
+    am_miss
+    where dataTime=#{dt}
+    and `status` = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from am_miss
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.Miss">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into am_miss (acctNo, dataTime, `status`
+    )
+    values (#{acctNo,jdbcType=INTEGER}, #{dataTime,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}
+    )
+  </insert>
+  <insert id="batchInsert">
+    insert into am_miss (acctNo, dataTime, `status`
+    )
+    values
+    <foreach collection="acctNos" item="acctNo" index="idx" separator=",">
+      (#{acctNo}, #{dt}, 1 )
+    </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.Miss">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into am_miss
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        acctNo,
+      </if>
+      <if test="dataTime != null">
+        dataTime,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="dataTime != null">
+        #{dataTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.Miss">
+    update am_miss
+    <set>
+      <if test="acctNo != null">
+        acctNo = #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="dataTime != null">
+        dataTime = #{dataTime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.Miss">
+    update am_miss
+    set acctNo = #{acctNo,jdbcType=INTEGER},
+      dataTime = #{dataTime,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="batchUpdate" >
+    update am_miss
+    set  `status` = 2
+    where
+    dataTime = #{dt}
+    and acctNo in
+    <foreach collection="acctNos" item="acctNo" separator="," open="(" close=")">
+      #{acctNo}
+    </foreach>
+  </update>
+</mapper>

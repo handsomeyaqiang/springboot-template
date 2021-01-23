@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.Customer">
+    <id column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="custName" jdbcType="VARCHAR" property="custName" />
+    <result column="idType" jdbcType="VARCHAR" property="idType" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="birtdate" jdbcType="DATE" property="birtdate" />
+    <result column="maritalStatus" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="hasChild" jdbcType="INTEGER" property="hasChild" />
+    <result column="hasHouse" jdbcType="INTEGER" property="hasHouse" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobilePhone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="regiseat" jdbcType="VARCHAR" property="regiseat" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="bankCardNo" jdbcType="VARCHAR" property="bankCardNo" />
+    <result column="bankName" jdbcType="VARCHAR" property="bankName" />
+    <result column="customerType" jdbcType="VARCHAR" property="customerType" />
+    <result column="caCompany" jdbcType="VARCHAR" property="caCompany" />
+    <result column="caType" jdbcType="VARCHAR" property="caType" />
+    <result column="caIndustryType" jdbcType="VARCHAR" property="caIndustryType" />
+    <result column="caDepartment" jdbcType="VARCHAR" property="caDepartment" />
+    <result column="caWorkPhone" jdbcType="VARCHAR" property="caWorkPhone" />
+    <result column="caDuty" jdbcType="VARCHAR" property="caDuty" />
+    <result column="caEnterTime" jdbcType="DATE" property="caEnterTime" />
+    <result column="caIncome" jdbcType="BIGINT" property="caIncome" />
+    <result column="agency" jdbcType="VARCHAR" property="agency" />
+    <result column="campus" jdbcType="VARCHAR" property="campus" />
+    <result column="viDriverLicense" jdbcType="VARCHAR" property="viDriverLicense" />
+    <result column="viPlateNum" jdbcType="VARCHAR" property="viPlateNum" />
+    <result column="viVehicleType" jdbcType="VARCHAR" property="viVehicleType" />
+    <result column="viFrameNum" jdbcType="VARCHAR" property="viFrameNum" />
+    <result column="viEngineNum" jdbcType="VARCHAR" property="viEngineNum" />
+    <result column="viFirstOncard" jdbcType="VARCHAR" property="viFirstOncard" />
+    <result column="viIsmort" jdbcType="VARCHAR" property="viIsmort" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+
+  <resultMap id="ContactMap" type="com.jikewang.send.domain.Contact">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="acctNo" jdbcType="INTEGER" property="acctNo" />
+    <result column="idNo" jdbcType="VARCHAR" property="idNo" />
+    <result column="contactName" jdbcType="VARCHAR" property="contactName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="contactType" jdbcType="VARCHAR" property="contactType" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="contactDepartment" jdbcType="VARCHAR" property="contactDepartment" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="lastUpdateTime" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+  </resultMap>
+  <resultMap id="ExtendsResultMap" type="com.jikewang.send.domain.Customer" extends="BaseResultMap">
+    <collection property="contacts" ofType="com.jikewang.send.domain.Contact" resultMap="contactResult" columnPrefix="ct_" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    acctNo, id, custName, idType, idNo, gender, age, birtdate, maritalStatus, education, 
+    hasChild, hasHouse, email, mobilePhone, regiseat, address, bankCardNo, bankName, 
+    customerType, caCompany, caType, caIndustryType, caDepartment, caWorkPhone, caDuty, 
+    caEnterTime, caIncome, agency, campus, viDriverLicense, viPlateNum, viVehicleType, 
+    viFrameNum, viEngineNum, viFirstOncard, viIsmort, lastUpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from am_customer
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </select>
+
+  <select id="findLatest" resultType="java.lang.Integer">
+    SELECT
+      DISTINCT cr.acctNo
+    FROM
+      am_customer cr
+    left JOIN
+    am_repaymentplan rn
+    on cr.acctNo = rn.acctNo
+    and date(rn.UpdateTime) =#{dt}
+    where date(cr.lastUpdateTime) = #{dt} and rn.acctNo is null
+  </select>
+  <select id="find" resultMap="ExtendsResultMap" >
+    SELECT
+		cr.*,
+		ct.id	as ct_id,
+        ct.acctNo	as ct_acctNo,
+        ct.idNo	as ct_idNo,
+        ct.contactName	as ct_contactName,
+        ct.phone	as ct_phone,
+        ct.email	as ct_email,
+        ct.contactType	as ct_contactType,
+        ct.relationship	as ct_relationship,
+        ct.contactDepartment	as ct_contactDepartment,
+        ct.address	as ct_address
+    FROM
+    am_customer cr
+    left JOIN
+    am_contact ct
+    on cr.acctNo = ct.acctNo
+    and date(ct.lastUpdateTime)=#{dt}
+    left JOIN
+    am_repaymentplan rn
+    on cr.acctNo = rn.acctNo
+    and date(rn.UpdateTime) =#{dt}
+    where date(cr.lastUpdateTime) = #{dt} and rn.acctNo is null
+    and cr.acctNo in
+    <foreach collection="acctNos" open="(" close=")" separator="," item="acctNo">
+      #{acctNo}
+    </foreach>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from am_customer
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.Customer">
+    insert into am_customer (acctNo, id, custName, 
+      idType, idNo, gender, 
+      age, birtdate, maritalStatus, 
+      education, hasChild, hasHouse, 
+      email, mobilePhone, regiseat, 
+      address, bankCardNo, bankName, 
+      customerType, caCompany, caType, 
+      caIndustryType, caDepartment, caWorkPhone, 
+      caDuty, caEnterTime, caIncome, 
+      agency, campus, viDriverLicense, 
+      viPlateNum, viVehicleType, viFrameNum, 
+      viEngineNum, viFirstOncard, viIsmort, 
+      lastUpdateTime)
+    values (#{acctNo,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{custName,jdbcType=VARCHAR}, 
+      #{idType,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{birtdate,jdbcType=DATE}, #{maritalStatus,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{hasChild,jdbcType=INTEGER}, #{hasHouse,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, #{regiseat,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{bankCardNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{customerType,jdbcType=VARCHAR}, #{caCompany,jdbcType=VARCHAR}, #{caType,jdbcType=VARCHAR}, 
+      #{caIndustryType,jdbcType=VARCHAR}, #{caDepartment,jdbcType=VARCHAR}, #{caWorkPhone,jdbcType=VARCHAR}, 
+      #{caDuty,jdbcType=VARCHAR}, #{caEnterTime,jdbcType=DATE}, #{caIncome,jdbcType=BIGINT}, 
+      #{agency,jdbcType=VARCHAR}, #{campus,jdbcType=VARCHAR}, #{viDriverLicense,jdbcType=VARCHAR}, 
+      #{viPlateNum,jdbcType=VARCHAR}, #{viVehicleType,jdbcType=VARCHAR}, #{viFrameNum,jdbcType=VARCHAR}, 
+      #{viEngineNum,jdbcType=VARCHAR}, #{viFirstOncard,jdbcType=VARCHAR}, #{viIsmort,jdbcType=VARCHAR}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.Customer">
+    insert into am_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        acctNo,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="custName != null">
+        custName,
+      </if>
+      <if test="idType != null">
+        idType,
+      </if>
+      <if test="idNo != null">
+        idNo,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="birtdate != null">
+        birtdate,
+      </if>
+      <if test="maritalStatus != null">
+        maritalStatus,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="hasChild != null">
+        hasChild,
+      </if>
+      <if test="hasHouse != null">
+        hasHouse,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobilePhone != null">
+        mobilePhone,
+      </if>
+      <if test="regiseat != null">
+        regiseat,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="bankCardNo != null">
+        bankCardNo,
+      </if>
+      <if test="bankName != null">
+        bankName,
+      </if>
+      <if test="customerType != null">
+        customerType,
+      </if>
+      <if test="caCompany != null">
+        caCompany,
+      </if>
+      <if test="caType != null">
+        caType,
+      </if>
+      <if test="caIndustryType != null">
+        caIndustryType,
+      </if>
+      <if test="caDepartment != null">
+        caDepartment,
+      </if>
+      <if test="caWorkPhone != null">
+        caWorkPhone,
+      </if>
+      <if test="caDuty != null">
+        caDuty,
+      </if>
+      <if test="caEnterTime != null">
+        caEnterTime,
+      </if>
+      <if test="caIncome != null">
+        caIncome,
+      </if>
+      <if test="agency != null">
+        agency,
+      </if>
+      <if test="campus != null">
+        campus,
+      </if>
+      <if test="viDriverLicense != null">
+        viDriverLicense,
+      </if>
+      <if test="viPlateNum != null">
+        viPlateNum,
+      </if>
+      <if test="viVehicleType != null">
+        viVehicleType,
+      </if>
+      <if test="viFrameNum != null">
+        viFrameNum,
+      </if>
+      <if test="viEngineNum != null">
+        viEngineNum,
+      </if>
+      <if test="viFirstOncard != null">
+        viFirstOncard,
+      </if>
+      <if test="viIsmort != null">
+        viIsmort,
+      </if>
+      <if test="lastUpdateTime != null">
+        lastUpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="acctNo != null">
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null">
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null">
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birtdate != null">
+        #{birtdate,jdbcType=DATE},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="hasChild != null">
+        #{hasChild,jdbcType=INTEGER},
+      </if>
+      <if test="hasHouse != null">
+        #{hasHouse,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="regiseat != null">
+        #{regiseat,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null">
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType != null">
+        #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="caCompany != null">
+        #{caCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="caType != null">
+        #{caType,jdbcType=VARCHAR},
+      </if>
+      <if test="caIndustryType != null">
+        #{caIndustryType,jdbcType=VARCHAR},
+      </if>
+      <if test="caDepartment != null">
+        #{caDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="caWorkPhone != null">
+        #{caWorkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="caDuty != null">
+        #{caDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="caEnterTime != null">
+        #{caEnterTime,jdbcType=DATE},
+      </if>
+      <if test="caIncome != null">
+        #{caIncome,jdbcType=BIGINT},
+      </if>
+      <if test="agency != null">
+        #{agency,jdbcType=VARCHAR},
+      </if>
+      <if test="campus != null">
+        #{campus,jdbcType=VARCHAR},
+      </if>
+      <if test="viDriverLicense != null">
+        #{viDriverLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="viPlateNum != null">
+        #{viPlateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="viVehicleType != null">
+        #{viVehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="viFrameNum != null">
+        #{viFrameNum,jdbcType=VARCHAR},
+      </if>
+      <if test="viEngineNum != null">
+        #{viEngineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="viFirstOncard != null">
+        #{viFirstOncard,jdbcType=VARCHAR},
+      </if>
+      <if test="viIsmort != null">
+        #{viIsmort,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.Customer">
+    update am_customer
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="custName != null">
+        custName = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null">
+        idType = #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null">
+        idNo = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birtdate != null">
+        birtdate = #{birtdate,jdbcType=DATE},
+      </if>
+      <if test="maritalStatus != null">
+        maritalStatus = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="hasChild != null">
+        hasChild = #{hasChild,jdbcType=INTEGER},
+      </if>
+      <if test="hasHouse != null">
+        hasHouse = #{hasHouse,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        mobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="regiseat != null">
+        regiseat = #{regiseat,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null">
+        bankCardNo = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        bankName = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerType != null">
+        customerType = #{customerType,jdbcType=VARCHAR},
+      </if>
+      <if test="caCompany != null">
+        caCompany = #{caCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="caType != null">
+        caType = #{caType,jdbcType=VARCHAR},
+      </if>
+      <if test="caIndustryType != null">
+        caIndustryType = #{caIndustryType,jdbcType=VARCHAR},
+      </if>
+      <if test="caDepartment != null">
+        caDepartment = #{caDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="caWorkPhone != null">
+        caWorkPhone = #{caWorkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="caDuty != null">
+        caDuty = #{caDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="caEnterTime != null">
+        caEnterTime = #{caEnterTime,jdbcType=DATE},
+      </if>
+      <if test="caIncome != null">
+        caIncome = #{caIncome,jdbcType=BIGINT},
+      </if>
+      <if test="agency != null">
+        agency = #{agency,jdbcType=VARCHAR},
+      </if>
+      <if test="campus != null">
+        campus = #{campus,jdbcType=VARCHAR},
+      </if>
+      <if test="viDriverLicense != null">
+        viDriverLicense = #{viDriverLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="viPlateNum != null">
+        viPlateNum = #{viPlateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="viVehicleType != null">
+        viVehicleType = #{viVehicleType,jdbcType=VARCHAR},
+      </if>
+      <if test="viFrameNum != null">
+        viFrameNum = #{viFrameNum,jdbcType=VARCHAR},
+      </if>
+      <if test="viEngineNum != null">
+        viEngineNum = #{viEngineNum,jdbcType=VARCHAR},
+      </if>
+      <if test="viFirstOncard != null">
+        viFirstOncard = #{viFirstOncard,jdbcType=VARCHAR},
+      </if>
+      <if test="viIsmort != null">
+        viIsmort = #{viIsmort,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        lastUpdateTime = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.Customer">
+    update am_customer
+    set id = #{id,jdbcType=INTEGER},
+      custName = #{custName,jdbcType=VARCHAR},
+      idType = #{idType,jdbcType=VARCHAR},
+      idNo = #{idNo,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      birtdate = #{birtdate,jdbcType=DATE},
+      maritalStatus = #{maritalStatus,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      hasChild = #{hasChild,jdbcType=INTEGER},
+      hasHouse = #{hasHouse,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      mobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+      regiseat = #{regiseat,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      bankCardNo = #{bankCardNo,jdbcType=VARCHAR},
+      bankName = #{bankName,jdbcType=VARCHAR},
+      customerType = #{customerType,jdbcType=VARCHAR},
+      caCompany = #{caCompany,jdbcType=VARCHAR},
+      caType = #{caType,jdbcType=VARCHAR},
+      caIndustryType = #{caIndustryType,jdbcType=VARCHAR},
+      caDepartment = #{caDepartment,jdbcType=VARCHAR},
+      caWorkPhone = #{caWorkPhone,jdbcType=VARCHAR},
+      caDuty = #{caDuty,jdbcType=VARCHAR},
+      caEnterTime = #{caEnterTime,jdbcType=DATE},
+      caIncome = #{caIncome,jdbcType=BIGINT},
+      agency = #{agency,jdbcType=VARCHAR},
+      campus = #{campus,jdbcType=VARCHAR},
+      viDriverLicense = #{viDriverLicense,jdbcType=VARCHAR},
+      viPlateNum = #{viPlateNum,jdbcType=VARCHAR},
+      viVehicleType = #{viVehicleType,jdbcType=VARCHAR},
+      viFrameNum = #{viFrameNum,jdbcType=VARCHAR},
+      viEngineNum = #{viEngineNum,jdbcType=VARCHAR},
+      viFirstOncard = #{viFirstOncard,jdbcType=VARCHAR},
+      viIsmort = #{viIsmort,jdbcType=VARCHAR},
+      lastUpdateTime = #{lastUpdateTime,jdbcType=TIMESTAMP}
+    where acctNo = #{acctNo,jdbcType=INTEGER}
+  </update>
+</mapper>

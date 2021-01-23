@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikewang.send.dao.NetloanUpdateMapper">
+  <resultMap id="BaseResultMap" type="com.jikewang.send.domain.NetloanUpdate">
+    <id column="appNo" jdbcType="INTEGER" property="appNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="bankNo" jdbcType="VARCHAR" property="bankNo" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="occupation" jdbcType="VARCHAR" property="occupation" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="appDate" jdbcType="TIMESTAMP" property="appDate" />
+    <result column="mortgage" jdbcType="VARCHAR" property="mortgage" />
+    <result column="productName" jdbcType="VARCHAR" property="productName" />
+    <result column="installment" jdbcType="INTEGER" property="installment" />
+    <result column="paymentDate" jdbcType="TIMESTAMP" property="paymentDate" />
+    <result column="paymentAmount" jdbcType="DECIMAL" property="paymentAmount" />
+    <result column="creditLimit" jdbcType="DECIMAL" property="creditLimit" />
+    <result column="mothRepayAmount" jdbcType="DECIMAL" property="mothRepayAmount" />
+    <result column="principalToBeRepay" jdbcType="DECIMAL" property="principalToBeRepay" />
+    <result column="interestToBeRepay" jdbcType="DECIMAL" property="interestToBeRepay" />
+    <result column="monthlyRepayDay" jdbcType="INTEGER" property="monthlyRepayDay" />
+    <result column="ﬁrstRepayDate" jdbcType="TIMESTAMP" property="ﬁrstRepayDate" />
+    <result column="overdueDays" jdbcType="INTEGER" property="overdueDays" />
+    <result column="repaidTimes" jdbcType="INTEGER" property="repaidTimes" />
+    <result column="leftTimes" jdbcType="INTEGER" property="leftTimes" />
+    <result column="amountDue" jdbcType="DECIMAL" property="amountDue" />
+    <result column="repaidAmount" jdbcType="DECIMAL" property="repaidAmount" />
+    <result column="penaltyInterest" jdbcType="DECIMAL" property="penaltyInterest" />
+    <result column="liquidatedDamages" jdbcType="DECIMAL" property="liquidatedDamages" />
+    <result column="comprehensiveRate" jdbcType="DECIMAL" property="comprehensiveRate" />
+    <result column="newCustomer" jdbcType="VARCHAR" property="newCustomer" />
+    <result column="faceSigned" jdbcType="VARCHAR" property="faceSigned" />
+    <result column="idCheck" jdbcType="VARCHAR" property="idCheck" />
+    <result column="phoneCheck" jdbcType="VARCHAR" property="phoneCheck" />
+    <result column="phoneArea" jdbcType="VARCHAR" property="phoneArea" />
+    <result column="blacklistCheck" jdbcType="VARCHAR" property="blacklistCheck" />
+    <result column="antifraudCheck" jdbcType="VARCHAR" property="antifraudCheck" />
+    <result column="manualApproval" jdbcType="VARCHAR" property="manualApproval" />
+    <result column="creditScoreCheck" jdbcType="VARCHAR" property="creditScoreCheck" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    appNo, `name`, idcard, phone, bankNo, address, occupation, company, appDate, mortgage, 
+    productName, installment, paymentDate, paymentAmount, creditLimit, mothRepayAmount, 
+    principalToBeRepay, interestToBeRepay, monthlyRepayDay, ﬁrstRepayDate, overdueDays, 
+    repaidTimes, leftTimes, amountDue, repaidAmount, penaltyInterest, liquidatedDamages, 
+    comprehensiveRate, newCustomer, faceSigned, idCheck, phoneCheck, phoneArea, blacklistCheck, 
+    antifraudCheck, manualApproval, creditScoreCheck
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from netloan_update
+    where appNo = #{appNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from netloan_update
+    where appNo = #{appNo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jikewang.send.domain.NetloanUpdate">
+    insert into netloan_update (appNo, `name`, idcard, 
+      phone, bankNo, address, 
+      occupation, company, appDate, 
+      mortgage, productName, installment, 
+      paymentDate, paymentAmount, creditLimit, 
+      mothRepayAmount, principalToBeRepay, interestToBeRepay, 
+      monthlyRepayDay, ﬁrstRepayDate, overdueDays, 
+      repaidTimes, leftTimes, amountDue, 
+      repaidAmount, penaltyInterest, liquidatedDamages, 
+      comprehensiveRate, newCustomer, faceSigned, 
+      idCheck, phoneCheck, phoneArea, 
+      blacklistCheck, antifraudCheck, manualApproval, 
+      creditScoreCheck)
+    values (#{appNo,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{occupation,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{appDate,jdbcType=TIMESTAMP}, 
+      #{mortgage,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{installment,jdbcType=INTEGER}, 
+      #{paymentDate,jdbcType=TIMESTAMP}, #{paymentAmount,jdbcType=DECIMAL}, #{creditLimit,jdbcType=DECIMAL}, 
+      #{mothRepayAmount,jdbcType=DECIMAL}, #{principalToBeRepay,jdbcType=DECIMAL}, #{interestToBeRepay,jdbcType=DECIMAL}, 
+      #{monthlyRepayDay,jdbcType=INTEGER}, #{ﬁrstRepayDate,jdbcType=TIMESTAMP}, #{overdueDays,jdbcType=INTEGER}, 
+      #{repaidTimes,jdbcType=INTEGER}, #{leftTimes,jdbcType=INTEGER}, #{amountDue,jdbcType=DECIMAL}, 
+      #{repaidAmount,jdbcType=DECIMAL}, #{penaltyInterest,jdbcType=DECIMAL}, #{liquidatedDamages,jdbcType=DECIMAL}, 
+      #{comprehensiveRate,jdbcType=DECIMAL}, #{newCustomer,jdbcType=VARCHAR}, #{faceSigned,jdbcType=VARCHAR}, 
+      #{idCheck,jdbcType=VARCHAR}, #{phoneCheck,jdbcType=VARCHAR}, #{phoneArea,jdbcType=VARCHAR}, 
+      #{blacklistCheck,jdbcType=VARCHAR}, #{antifraudCheck,jdbcType=VARCHAR}, #{manualApproval,jdbcType=VARCHAR}, 
+      #{creditScoreCheck,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jikewang.send.domain.NetloanUpdate">
+    insert into netloan_update
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appNo != null">
+        appNo,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="bankNo != null">
+        bankNo,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="occupation != null">
+        occupation,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="appDate != null">
+        appDate,
+      </if>
+      <if test="mortgage != null">
+        mortgage,
+      </if>
+      <if test="productName != null">
+        productName,
+      </if>
+      <if test="installment != null">
+        installment,
+      </if>
+      <if test="paymentDate != null">
+        paymentDate,
+      </if>
+      <if test="paymentAmount != null">
+        paymentAmount,
+      </if>
+      <if test="creditLimit != null">
+        creditLimit,
+      </if>
+      <if test="mothRepayAmount != null">
+        mothRepayAmount,
+      </if>
+      <if test="principalToBeRepay != null">
+        principalToBeRepay,
+      </if>
+      <if test="interestToBeRepay != null">
+        interestToBeRepay,
+      </if>
+      <if test="monthlyRepayDay != null">
+        monthlyRepayDay,
+      </if>
+      <if test="ﬁrstRepayDate != null">
+        ﬁrstRepayDate,
+      </if>
+      <if test="overdueDays != null">
+        overdueDays,
+      </if>
+      <if test="repaidTimes != null">
+        repaidTimes,
+      </if>
+      <if test="leftTimes != null">
+        leftTimes,
+      </if>
+      <if test="amountDue != null">
+        amountDue,
+      </if>
+      <if test="repaidAmount != null">
+        repaidAmount,
+      </if>
+      <if test="penaltyInterest != null">
+        penaltyInterest,
+      </if>
+      <if test="liquidatedDamages != null">
+        liquidatedDamages,
+      </if>
+      <if test="comprehensiveRate != null">
+        comprehensiveRate,
+      </if>
+      <if test="newCustomer != null">
+        newCustomer,
+      </if>
+      <if test="faceSigned != null">
+        faceSigned,
+      </if>
+      <if test="idCheck != null">
+        idCheck,
+      </if>
+      <if test="phoneCheck != null">
+        phoneCheck,
+      </if>
+      <if test="phoneArea != null">
+        phoneArea,
+      </if>
+      <if test="blacklistCheck != null">
+        blacklistCheck,
+      </if>
+      <if test="antifraudCheck != null">
+        antifraudCheck,
+      </if>
+      <if test="manualApproval != null">
+        manualApproval,
+      </if>
+      <if test="creditScoreCheck != null">
+        creditScoreCheck,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appNo != null">
+        #{appNo,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null">
+        #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="appDate != null">
+        #{appDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mortgage != null">
+        #{mortgage,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="installment != null">
+        #{installment,jdbcType=INTEGER},
+      </if>
+      <if test="paymentDate != null">
+        #{paymentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentAmount != null">
+        #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="creditLimit != null">
+        #{creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="mothRepayAmount != null">
+        #{mothRepayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="principalToBeRepay != null">
+        #{principalToBeRepay,jdbcType=DECIMAL},
+      </if>
+      <if test="interestToBeRepay != null">
+        #{interestToBeRepay,jdbcType=DECIMAL},
+      </if>
+      <if test="monthlyRepayDay != null">
+        #{monthlyRepayDay,jdbcType=INTEGER},
+      </if>
+      <if test="ﬁrstRepayDate != null">
+        #{ﬁrstRepayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overdueDays != null">
+        #{overdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="repaidTimes != null">
+        #{repaidTimes,jdbcType=INTEGER},
+      </if>
+      <if test="leftTimes != null">
+        #{leftTimes,jdbcType=INTEGER},
+      </if>
+      <if test="amountDue != null">
+        #{amountDue,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidAmount != null">
+        #{repaidAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="penaltyInterest != null">
+        #{penaltyInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="liquidatedDamages != null">
+        #{liquidatedDamages,jdbcType=DECIMAL},
+      </if>
+      <if test="comprehensiveRate != null">
+        #{comprehensiveRate,jdbcType=DECIMAL},
+      </if>
+      <if test="newCustomer != null">
+        #{newCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="faceSigned != null">
+        #{faceSigned,jdbcType=VARCHAR},
+      </if>
+      <if test="idCheck != null">
+        #{idCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneCheck != null">
+        #{phoneCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneArea != null">
+        #{phoneArea,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistCheck != null">
+        #{blacklistCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="antifraudCheck != null">
+        #{antifraudCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="manualApproval != null">
+        #{manualApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="creditScoreCheck != null">
+        #{creditScoreCheck,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikewang.send.domain.NetloanUpdate">
+    update netloan_update
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null">
+        bankNo = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="appDate != null">
+        appDate = #{appDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mortgage != null">
+        mortgage = #{mortgage,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="installment != null">
+        installment = #{installment,jdbcType=INTEGER},
+      </if>
+      <if test="paymentDate != null">
+        paymentDate = #{paymentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentAmount != null">
+        paymentAmount = #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="creditLimit != null">
+        creditLimit = #{creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="mothRepayAmount != null">
+        mothRepayAmount = #{mothRepayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="principalToBeRepay != null">
+        principalToBeRepay = #{principalToBeRepay,jdbcType=DECIMAL},
+      </if>
+      <if test="interestToBeRepay != null">
+        interestToBeRepay = #{interestToBeRepay,jdbcType=DECIMAL},
+      </if>
+      <if test="monthlyRepayDay != null">
+        monthlyRepayDay = #{monthlyRepayDay,jdbcType=INTEGER},
+      </if>
+      <if test="ﬁrstRepayDate != null">
+        ﬁrstRepayDate = #{ﬁrstRepayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overdueDays != null">
+        overdueDays = #{overdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="repaidTimes != null">
+        repaidTimes = #{repaidTimes,jdbcType=INTEGER},
+      </if>
+      <if test="leftTimes != null">
+        leftTimes = #{leftTimes,jdbcType=INTEGER},
+      </if>
+      <if test="amountDue != null">
+        amountDue = #{amountDue,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidAmount != null">
+        repaidAmount = #{repaidAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="penaltyInterest != null">
+        penaltyInterest = #{penaltyInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="liquidatedDamages != null">
+        liquidatedDamages = #{liquidatedDamages,jdbcType=DECIMAL},
+      </if>
+      <if test="comprehensiveRate != null">
+        comprehensiveRate = #{comprehensiveRate,jdbcType=DECIMAL},
+      </if>
+      <if test="newCustomer != null">
+        newCustomer = #{newCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="faceSigned != null">
+        faceSigned = #{faceSigned,jdbcType=VARCHAR},
+      </if>
+      <if test="idCheck != null">
+        idCheck = #{idCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneCheck != null">
+        phoneCheck = #{phoneCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneArea != null">
+        phoneArea = #{phoneArea,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistCheck != null">
+        blacklistCheck = #{blacklistCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="antifraudCheck != null">
+        antifraudCheck = #{antifraudCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="manualApproval != null">
+        manualApproval = #{manualApproval,jdbcType=VARCHAR},
+      </if>
+      <if test="creditScoreCheck != null">
+        creditScoreCheck = #{creditScoreCheck,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where appNo = #{appNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jikewang.send.domain.NetloanUpdate">
+    update netloan_update
+    set `name` = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      bankNo = #{bankNo,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      appDate = #{appDate,jdbcType=TIMESTAMP},
+      mortgage = #{mortgage,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      installment = #{installment,jdbcType=INTEGER},
+      paymentDate = #{paymentDate,jdbcType=TIMESTAMP},
+      paymentAmount = #{paymentAmount,jdbcType=DECIMAL},
+      creditLimit = #{creditLimit,jdbcType=DECIMAL},
+      mothRepayAmount = #{mothRepayAmount,jdbcType=DECIMAL},
+      principalToBeRepay = #{principalToBeRepay,jdbcType=DECIMAL},
+      interestToBeRepay = #{interestToBeRepay,jdbcType=DECIMAL},
+      monthlyRepayDay = #{monthlyRepayDay,jdbcType=INTEGER},
+      ﬁrstRepayDate = #{ﬁrstRepayDate,jdbcType=TIMESTAMP},
+      overdueDays = #{overdueDays,jdbcType=INTEGER},
+      repaidTimes = #{repaidTimes,jdbcType=INTEGER},
+      leftTimes = #{leftTimes,jdbcType=INTEGER},
+      amountDue = #{amountDue,jdbcType=DECIMAL},
+      repaidAmount = #{repaidAmount,jdbcType=DECIMAL},
+      penaltyInterest = #{penaltyInterest,jdbcType=DECIMAL},
+      liquidatedDamages = #{liquidatedDamages,jdbcType=DECIMAL},
+      comprehensiveRate = #{comprehensiveRate,jdbcType=DECIMAL},
+      newCustomer = #{newCustomer,jdbcType=VARCHAR},
+      faceSigned = #{faceSigned,jdbcType=VARCHAR},
+      idCheck = #{idCheck,jdbcType=VARCHAR},
+      phoneCheck = #{phoneCheck,jdbcType=VARCHAR},
+      phoneArea = #{phoneArea,jdbcType=VARCHAR},
+      blacklistCheck = #{blacklistCheck,jdbcType=VARCHAR},
+      antifraudCheck = #{antifraudCheck,jdbcType=VARCHAR},
+      manualApproval = #{manualApproval,jdbcType=VARCHAR},
+      creditScoreCheck = #{creditScoreCheck,jdbcType=VARCHAR}
+    where appNo = #{appNo,jdbcType=INTEGER}
+  </update>
+</mapper>
