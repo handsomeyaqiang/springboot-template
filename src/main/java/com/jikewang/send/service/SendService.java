@@ -25,5 +25,11 @@ public interface SendService {
     void batchInsert(String paramString, List<Integer> paramList);
 
     void batchUpdate(String paramString, List<Integer> paramList);
+
+    List<Integer> findWdAll();
+
+    void sendWd(List<Integer> paramList, boolean paramBoolean);
+
+    List<Integer> findFail();
 }
 

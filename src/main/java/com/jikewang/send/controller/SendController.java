@@ -265,7 +265,62 @@ public class SendController {
         this.sendService.batchUpdate(dt, acctNos);
         return RestResult.success();
     }
+    @RequestMapping({"/sendWd"})
+    public RestResult sendWd(Integer appNo) {
+        log.info("发送网贷平台数据开始：" + LocalDateTime.now().toString());
+        List<Integer> appNos = null;
+        if (appNo == null) {
+            appNos = this.sendService.findWdAll();
+        } else {
+            appNos = Arrays.asList(new Integer[] { appNo });
+        }
+        if (appNos.isEmpty()) {
+            log.info("没有数据，发送网贷平台数据结束：" + LocalDateTime.now().toString());
+            return RestResult.success();
+        }
+        int limit = 2000;
+        int start = 0;
+        int end = limit;
+        int last = appNos.size();
+        while (start < last) {
+            if (end > last) {
+                end = last;
+            }
+            List<Integer> subAppNos = appNos.subList(start, end);
+            start += limit;
+            end += limit;
+            this.sendService.sendWd(subAppNos, true);
+        }
+        log.info("发送网贷平台数据结束：" + LocalDateTime.now().toString());
+        return RestResult.success();
+    }
 
+
+    @RequestMapping({"/sendWdFail"})
+    public RestResult sendWdFail() {
+        log.info("发送网贷平台失败数据开始：" + LocalDateTime.now().toString());
+        List<Integer> appNos = this.sendService.findFail();
+
+        if (appNos.isEmpty()) {
+            log.info("没有数据，发送网贷平台失败数据结束：" + LocalDateTime.now().toString());
+            return RestResult.success();
+        }
+        int limit = 2000;
+        int start = 0;
+        int end = limit;
+        int last = appNos.size();
+        while (start < last) {
+            if (end > last) {
+                end = last;
+            }
+            List<Integer> subAppNos = appNos.subList(start, end);
+            start += limit;
+            end += limit;
+            this.sendService.sendWd(subAppNos, false);
+        }
+        log.info("发送网贷平台失败数据结束：" + LocalDateTime.now().toString());
+        return RestResult.success();
+    }
     @RequestMapping({"/ping"})
     public String ping() {
         return "pong";

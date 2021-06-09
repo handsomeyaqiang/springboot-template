@@ -2,18 +2,20 @@ package com.jikewang.send.dao;
 
 import com.jikewang.send.domain.NetloanUpdate;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface NetloanUpdateMapper {
-    int deleteByPrimaryKey(Integer appNo);
+    List<Integer> findWdAll();
 
-    int insert(NetloanUpdate record);
+    List<NetloanUpdate> query(@Param("appNos") List<Integer> paramList);
 
-    int insertSelective(NetloanUpdate record);
+    void batchInsert(@Param("appNos") List<Integer> paramList);
 
-    NetloanUpdate selectByPrimaryKey(Integer appNo);
+    List<Integer> findFail();
 
-    int updateByPrimaryKeySelective(NetloanUpdate record);
+    void batchUpdate(@Param("appNos") List<Integer> paramList);
 
-    int updateByPrimaryKey(NetloanUpdate record);
 }

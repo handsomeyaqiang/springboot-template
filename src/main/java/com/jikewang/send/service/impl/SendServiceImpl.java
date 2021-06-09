@@ -5,14 +5,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jikewang.send.dao.LoanMapper;
 import com.jikewang.send.dao.MissMapper;
+import com.jikewang.send.dao.NetloanUpdateMapper;
 import com.jikewang.send.dao.RepaymentplanMapper;
 import com.jikewang.send.domain.Loan;
 import com.jikewang.send.domain.LoanFill;
 import com.jikewang.send.domain.LoanInfo;
+import com.jikewang.send.domain.NetloanUpdate;
 import com.jikewang.send.service.SendService;
 import com.jikewang.send.utils.Consts;
 import com.jikewang.send.utils.HttpUtil;
 import com.jikewang.send.utils.HttpsUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,10 +24,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Instant;
+import java.util.*;
 
 /**
  * @ProjectName: send
@@ -44,6 +45,9 @@ public class SendServiceImpl implements SendService {
     private RepaymentplanMapper repaymentplanMapper;
     @Autowired
     private MissMapper missMapper;
+    @Autowired
+    private NetloanUpdateMapper netloanUpdateMapper;
+
     public List<Integer> findLatest(String dt) {
         return repaymentplanMapper.findLatest(dt);
     }
@@ -64,6 +68,9 @@ public class SendServiceImpl implements SendService {
         this.missMapper.batchUpdate(dt, acctNos);
     }
 
+    public List<Integer> findWdAll(){
+        return this.netloanUpdateMapper.findWdAll();
+    }
     @Async("taskExecutor")
     public void sendKt(String dt, List<Integer> subAcctNos, boolean newData) {
         Map<String, Object> params = new HashMap<String, Object>(4);
@@ -146,5 +153,53 @@ public class SendServiceImpl implements SendService {
                 this.missMapper.batchUpdate(dt, subAcctNos);
             }
         }
+    }
+
+    public void sendWd(List<Integer> subAppNos, boolean newData) {
+        List<NetloanUpdate> loans = this.netloanUpdateMapper.query(subAppNos);
+        Random random = new Random();
+        if (!loans.isEmpty()) {
+            String batchId = UUID.randomUUID().toString().replaceAll("-", "");
+            String timestamp = String.valueOf(Instant.now().getEpochSecond());
+            String nonce = String.valueOf(random.nextInt(9000) + 1000);
+            String tokenKey = DigestUtils.md5Hex("f1d33acc3eba4de485d45689daa11ad2" + batchId + nonce + timestamp);
+
+            JSONObject postData = new JSONObject();
+            postData.put("batchId", batchId);
+            postData.put("timestamp", timestamp);
+            postData.put("nonce", nonce);
+            postData.put("appId", "477abef28f2845c68f47d38ae28d8328");
+            postData.put("tokenKey", tokenKey);
+            postData.put("data", loans);
+            JSONObject responseObject = null;
+            try {
+                log.info("发送批次：" + batchId);
+                responseObject = HttpsUtil.post("https://zbb.tcredit.com/platform/upload", postData
+                        .toJSONString(), "utf-8");
+                System.out.println(responseObject);
+            } catch (IOException|InterruptedException|java.security.NoSuchAlgorithmException|java.security.KeyManagementException e) {
+                e.printStackTrace();
+            }
+            log.info("返回数据：" + responseObject);
+            if (responseObject == null || responseObject.getIntValue("code") != 0) {
+                if (newData) {
+                    log.error("发送失败：" + subAppNos);
+                    this.netloanUpdateMapper.batchInsert(subAppNos);
+                } else {
+                    log.error("重新发送失败：" + subAppNos);
+                }
+
+            } else if (newData) {
+                log.info("发送成功：" + subAppNos);
+            } else {
+                log.info("重新发送成功：" + subAppNos);
+
+                this.netloanUpdateMapper.batchUpdate(subAppNos);
+            }
+        }
+    }
+
+    public List<Integer> findFail() {
+        return this.netloanUpdateMapper.findFail();
     }
 }
