@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @ProjectName: send
  * @Package: com.jikewang.send.controller
@@ -39,7 +41,7 @@ public class MapperController {
 
     @RequestMapping("/getNetInfo")
     public RestResult getNetInfo() {
-        NetloanUpdate netloanUpdate = netloanUpdateMapper.selectByPrimaryKey(8461926);
-        return RestResult.success(netloanUpdate);
+        List<Integer> wdAll = netloanUpdateMapper.findWdAll();
+        return RestResult.success(wdAll);
     }
 }

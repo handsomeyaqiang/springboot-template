@@ -11,6 +11,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * @ProjectName: send
@@ -31,7 +32,7 @@ public class HttpUtil {
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(100000).setConnectTimeout(100000).build();
         post.setConfig(requestConfig);
 
-        StringEntity s = new StringEntity(data, Charsets.UTF_8);
+        StringEntity s = new StringEntity(data, Charset.forName("UTF-8"));
 
         post.addHeader("Content-Type", "application/json;charset=utf-8");
         post.setHeader("Accept", "application/json");
